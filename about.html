@@ -1,0 +1,1825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stackly digital marketing </title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+
+<!-- Swiper -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+<!-- Animate -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",sans-serif;}
+  
+  /* THEME VARIABLES */
+  :root{
+    --bg:#ffffff;
+    --text:white;
+    --glass:rgba(255,255,255,0.6);
+    --border:rgba(255,255,255,0.3);
+    --accent:#813ddf;
+  }
+  
+  body.dark{
+    --bg:#020617;
+    --text:#e2e8f0;
+    --glass:rgba(15,23,42,0.7);
+    --border:rgba(255,255,255,0.1);
+  }
+  
+  body{
+    background:var(--bg);
+    color:var(--text);
+    transition:0.3s;
+  }
+  
+  /* HEADER */
+  header{
+    position:fixed;
+    top:0;left:0;width:100%;
+    background:var(--glass);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+    box-shadow:0 8px 30px rgba(0,0,0,0.05);
+    z-index:1000;
+    transition:0.3s;
+  }
+  
+  /* SHRINK */
+  header.shrink{
+    padding:5px 0;
+    box-shadow:0 4px 15px rgba(0,0,0,0.08);
+  }
+  
+  .navbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 40px;
+    position:relative;
+  }
+  
+  /* LOGO */
+  .logo img{height:40px;}
+  
+  /* NAV */
+  .nav-links{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:30px;
+  }
+  
+  .nav-links a{
+    text-decoration:none;
+    color:var(--text);
+    font-weight:500;
+    position:relative;
+  }
+  
+  .nav-links a:hover,
+  .nav-links a.active{
+    color:var(--accent);
+  }
+  
+  .nav-links a:hover::after,
+  .nav-links a.active::after{
+    content:"";
+    position:absolute;
+    bottom:-6px;
+    left:0;
+    width:100%;
+    height:2px;
+    background:var(--accent);
+  }
+  
+  /* RIGHT */
+  .right{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  
+  .btn{
+    padding:8px 18px;
+    border-radius:30px;
+    border:none;
+    cursor:pointer;
+    font-size:14px;
+    transition:0.3s;
+  }
+  
+  .login{
+    background:transparent;
+    border:1px solid var(--accent);
+    color:var(--accent);
+  }
+  
+  .login:hover{
+    background:var(--accent);
+    color:black;
+  }
+  
+  .register{
+    background:var(--accent);
+    color:black;
+  }
+  
+  /* DARK MODE BUTTON */
+  .theme-toggle{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    background:var(--accent);
+    color:black;
+    font-size:16px;
+  }
+  
+  /* MENU */
+  .menu-toggle{
+    display:none;
+    font-size:22px;
+    cursor:pointer;
+  }
+  
+  /* MOBILE MENU */
+  .mobile-menu{
+    position:fixed;
+    top:0;left:-100%;
+    width:260px;height:100vh;
+    background:var(--bg);
+    padding:20px;
+    transition:0.3s;
+    z-index:2000;
+  }
+  
+  .mobile-menu.active{left:0;}
+  
+  .mobile-menu a{
+    display:block;
+    margin:15px 0;
+    text-decoration:none;
+    color:var(--text);
+  }
+  
+  /* OVERLAY */
+  .overlay{
+    position:fixed;
+    top:0;left:0;
+    width:100%;height:100%;
+    background:rgba(0,0,0,0.4);
+    display:none;
+    z-index:1500;
+  }
+  
+  .overlay.active{display:block;}
+  
+  /* RESPONSIVE */
+  @media(max-width:900px){
+    .nav-links{display:none;}
+    .right{display:none;}
+    .menu-toggle{display:block;}
+  }
+  
+  @media(max-width:576px){
+    .navbar{padding:15px;}
+  }
+  </style>
+  
+  <header id="header">
+    <div class="navbar">
+  
+      <div class="menu-toggle" onclick="toggleMenu()">
+        ☰
+      </div>
+  
+      <div class="logo">
+        <a href="./index.html">
+          <img src="./logo.webp" alt="Stackly">
+        </a>
+      </div>
+  
+      <div class="nav-links">
+        <a href="./index.html">HOME</a>
+    <a href="./about.html">ABOUT</a>
+    <a href="./service.html">SERVICE</a>
+    <a href="./Ticket.html">TICKET</a>
+    
+    <a href="./contact.html">CONTACT</a>
+      </div>
+  
+      <div class="right">
+        <div class="theme-toggle" onclick="toggleTheme()">🌙</div>
+        <button class="btn login" onclick="location.href='login.html'">Login</button>
+        <button class="btn register" onclick="location.href='register.html'">Register</button>
+      </div>
+  
+    </div>
+  </header>
+  
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="./index.html">HOME</a>
+    <a href="./about.html">ABOUT</a>
+    <a href="./service.html">SERVICE</a>
+    <a href="./Ticket.html">TICKET</a>
+    
+    <a href="./contact.html">CONTACT</a>
+    <hr>
+    <a href="./login.html">Login</a>
+    <a href="./register.html">Register</a>
+  </div>
+  
+  <div class="overlay" id="overlay"></div>
+  
+  <script>
+  // MENU
+  function toggleMenu(){
+    mobileMenu.classList.toggle("active");
+    overlay.classList.toggle("active");
+  }
+  
+  overlay.onclick=()=>{
+    mobileMenu.classList.remove("active");
+    overlay.classList.remove("active");
+  };
+  
+  // SHRINK
+  window.addEventListener("scroll",()=>{
+    header.classList.toggle("shrink",window.scrollY>50);
+  });
+  
+  // DARK MODE
+  function toggleTheme(){
+    document.body.classList.toggle("dark");
+  
+    const icon = document.querySelector(".theme-toggle");
+    if(document.body.classList.contains("dark")){
+      icon.textContent="☀️";
+    }else{
+      icon.textContent="🌙";
+    }
+  }
+  </script>
+    
+    </body>
+<section class="faqhero-section">
+
+    <!-- OVERLAY -->
+    <div class="faqhero-overlay"></div>
+  
+    <div class="faqhero-container faqhero-reveal">
+  
+      <!-- HEADING -->
+      <h1 class="faqhero-title">ABOUT</h1>
+  
+      <!-- SUBTEXT -->
+      <!-- <p class="faqhero-sub">Find answers to your questions about our IT services</p> -->
+  
+      <!-- BREADCRUMB -->
+      <div class="faqhero-breadcrumb">
+        <a href="./index.html">Home</a>
+        <span>→</span>
+        <span class="active">ABOUT</span>
+      </div>
+  
+    </div>
+  
+  </section>
+
+  <Style>
+    /* SECTION */
+.faqhero-section{
+  position:relative;
+  height:60vh;
+  min-height:400px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#fff;
+  overflow:hidden;
+
+  background:url("./im2.webp") center/cover no-repeat;
+}
+
+/* OVERLAY */
+.faqhero-overlay{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,255,150,0.2));
+  backdrop-filter:blur(4px);
+}
+
+/* CONTAINER */
+.faqhero-container{
+  position:relative;
+  z-index:2;
+  padding:20px;
+}
+
+/* TITLE */
+.faqhero-title{
+  font-size:64px;
+  font-weight:700;
+  letter-spacing:2px;
+  margin-bottom:10px;
+  text-shadow:0 0 20px #813ddf;
+}
+
+/* SUBTEXT */
+.faqhero-sub{
+  font-size:18px;
+  opacity:0.9;
+  margin-bottom:20px;
+}
+
+/* BREADCRUMB */
+.faqhero-breadcrumb{
+  display:inline-flex;
+  gap:10px;
+  padding:10px 25px;
+  border-radius:50px;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(10px);
+  box-shadow:0 0 15px rgba(230, 158, 227, 0.4);
+}
+
+.faqhero-breadcrumb a{
+  color:#813ddf;
+  text-decoration:none;
+}
+
+.faqhero-breadcrumb span{
+  opacity:0.8;
+}
+
+.faqhero-breadcrumb .active{
+  color:#fff;
+  font-weight:600;
+}
+
+/* SCROLL ANIMATION */
+.faqhero-reveal{
+  opacity:0;
+  transform:translateY(60px);
+  transition:0.8s ease;
+}
+
+.faqhero-show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* RESPONSIVE */
+
+/* TABLET */
+@media(max-width:992px){
+  .faqhero-title{
+    font-size:48px;
+  }
+}
+
+/* MOBILE */
+@media(max-width:600px){
+  .faqhero-section{
+    height:50vh;
+  }
+
+  .faqhero-title{
+    font-size:36px;
+  }
+
+  .faqhero-sub{
+    font-size:14px;
+  }
+
+  .faqhero-breadcrumb{
+    font-size:13px;
+    padding:8px 18px;
+  }
+}
+  </Style>
+
+<script>
+    const faqHero = document.querySelector(".faqhero-reveal");
+    
+    function revealFAQHero(){
+      const top = faqHero.getBoundingClientRect().top;
+      if(top < window.innerHeight - 50){
+        faqHero.classList.add("faqhero-show");
+      }
+    }
+    
+    window.addEventListener("load", revealFAQHero);
+    window.addEventListener("scroll", revealFAQHero);
+    </script>
+
+
+
+<section class="tp-about">
+
+    <!-- BACKGROUND -->
+    <div class="tp-about-bg"></div>
+  
+    <div class="tp-about-container">
+  
+      <!-- LEFT CONTENT -->
+      <div class="tp-about-left">
+  
+        <div class="tp-badge tp-anim" data-delay="0.2">💡 About Us</div>
+  
+        <h2 class="tp-anim" data-delay="0.3">
+          Empowering IT Support with Smart Ticketing
+        </h2>
+  
+        <p class="tp-anim" data-delay="0.4">
+          We deliver a next-generation IT ticketing system designed to simplify workflows, 
+          automate processes, and enhance support efficiency across organizations.
+        </p>
+  
+        <p class="tp-anim" data-delay="0.5">
+          Our platform ensures faster resolutions, better collaboration, and real-time visibility Lorem ipsum dolor sit amet consectetur, adipisicing elit. Et, autem fugit? Laboriosam, mollitia doloribus nihil aut qui fuga deserunt corrupti s
+          imilique illo in delectus fugiat itaque cum error provident voluptatem?
+        </p>
+  
+        <a href="404.html" class="tp-btn tp-anim" data-delay="0.6">
+          Learn More
+        </a>
+  
+      </div>
+  
+      <!-- RIGHT SCROLLING CAPSULES -->
+      <div class="tp-about-right">
+  
+        <div class="tp-scroll-box">
+  
+          <div class="tp-scroll-track">
+  
+            <!-- ITEMS -->
+            <div class="tp-point">⚡ Fast Ticket Resolution</div>
+            <div class="tp-point">🧠 AI-Based Automation</div>
+            <div class="tp-point">📊 Real-Time Insights</div>
+            <div class="tp-point">🔐 Secure System</div>
+            <div class="tp-point">🌐 Multi-Platform Access</div>
+  
+            <!-- DUPLICATE FOR LOOP -->
+            <div class="tp-point">⚡ Fast Ticket Resolution</div>
+            <div class="tp-point">🧠 AI-Based Automation</div>
+            <div class="tp-point">📊 Real-Time Insights</div>
+            <div class="tp-point">🔐 Secure System</div>
+            <div class="tp-point">🌐 Multi-Platform Access</div>
+  
+          </div>
+  
+        </div>
+  
+      </div>
+  
+    </div>
+  
+  </section>
+  
+  <style>
+  
+  /* SECTION */
+  .tp-about{
+    position:relative;
+    padding:100px 8%;
+    overflow:hidden;
+  }
+  
+  /* BACKGROUND IMAGE */
+  .tp-about-bg{
+    position:absolute;
+    inset:0;
+    background:url('./ima.webp') center/cover no-repeat;
+    z-index:-2;
+  }
+  
+  /* DARK OVERLAY */
+  .tp-about::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(11,15,26,0.85);
+    z-index:-1;
+  }
+  
+  /* CONTAINER */
+  .tp-about-container{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    gap:60px;
+  }
+  
+  /* LEFT */
+  .tp-about-left{flex:1;}
+  
+  .tp-badge{
+    display:inline-block;
+    padding:6px 18px;
+    border-radius:50px;
+    background:rgba(95,92,255,0.15);
+    border:1px solid rgba(95,92,255,0.4);
+    margin-bottom:15px;
+  }
+  
+  .tp-about-left h2{
+    font-size:36px;
+    margin-bottom:15px;
+  }
+  
+  .tp-about-left p{
+    opacity:0.8;
+    margin-bottom:15px;
+  }
+  
+  /* BUTTON */
+  .tp-btn{
+    display:inline-block;
+    padding:12px 28px;
+    border-radius:30px;
+    background:#5f5cff;
+    text-decoration:none;
+    color:#fff;
+  }
+  
+  /* RIGHT */
+  .tp-about-right{
+    flex:1;
+  }
+  
+  /* SCROLL BOX */
+  .tp-scroll-box{
+    height:300px;
+    overflow:hidden;
+    position:relative;
+  }
+  
+  /* TRACK */
+  .tp-scroll-track{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    animation:tp-scroll-up 12s linear infinite;
+  }
+  
+  /* SCROLL ANIMATION */
+  @keyframes tp-scroll-up{
+    from{transform:translateY(0);}
+    to{transform:translateY(-50%);}
+  }
+  
+  /* CAPSULE ITEMS */
+  .tp-point{
+    padding:15px 25px;
+    border-radius:50px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(12px);
+    text-align:center;
+    white-space:nowrap;
+    transition:0.3s;
+  }
+  
+  /* HOVER */
+  .tp-point:hover{
+    transform:translateX(10px);
+    background:rgba(95,92,255,0.2);
+  }
+  
+  /* PAUSE ON HOVER */
+  .tp-scroll-box:hover .tp-scroll-track{
+    animation-play-state:paused;
+  }
+  
+  /* ANIMATION */
+  .tp-anim{
+    opacity:0;
+    transform:translateY(60px);
+    transition:0.8s ease;
+  }
+  
+  .tp-show{
+    opacity:1 !important;
+    transform:translateY(0) !important;
+  }
+  
+  /* RESPONSIVE */
+  
+  /* LAPTOP */
+  @media(max-width:1200px){
+    .tp-about-container{
+      flex-direction:column;
+      text-align:center;
+    }
+  }
+  
+  /* TABLET */
+  @media(max-width:768px){
+    .tp-about-left h2{
+      font-size:28px;
+    }
+  }
+  
+  /* MOBILE */
+  @media(max-width:480px){
+  
+    .tp-about{
+      padding:70px 5%;
+    }
+  
+    .tp-scroll-box{
+      height:250px;
+    }
+  
+  }
+  
+  </style>
+  
+  <script>
+  (function(){
+  
+    const section = document.querySelector('.tp-about');
+    if(!section) return;
+  
+    const elements = section.querySelectorAll('.tp-anim');
+  
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+  
+          let delay = entry.target.dataset.delay || 0;
+  
+          setTimeout(()=>{
+            entry.target.classList.add('tp-show');
+          }, delay * 1000);
+  
+        }
+      });
+    },{threshold:0.2});
+  
+    elements.forEach(el=>observer.observe(el));
+  
+  })();
+  </script>
+
+<section class="tp-services">
+
+    <h2 class="tp-title tp-anim">🚀 What We Offer</h2>
+  
+    <div class="tp-services-grid">
+  
+      <!-- CARD -->
+      <div class="tp-card tp-anim" data-delay="0.1">
+        <div class="tp-img">
+          <img src="./IT.webp">
+        </div>
+        <i class="fa-solid fa-ticket"></i>
+        <h3>IT Ticket Management</h3>
+        <p>Manage, assign, and track service tickets seamlessly with real-time updates.</p>
+        <!-- <a href="404.html">Select</a> -->
+      </div>
+  
+      <div class="tp-card tp-anim" data-delay="0.2">
+        <div class="tp-img">
+          <img src="./workflow.webp">
+        </div>
+        <i class="fa-solid fa-gear"></i>
+        <h3>Workflow Automation</h3>
+        <p>Automate routing, approvals, and IT processes to boost productivity.</p>
+        <!-- <a href="404.html">Select</a> -->
+      </div>
+  
+      <div class="tp-card tp-anim" data-delay="0.3">
+        <div class="tp-img">
+          <img src="./cloud.webp">
+        </div>
+        <i class="fa-solid fa-cloud"></i>
+        <h3>Cloud Integration</h3>
+        <p>Integrate Stackly with your cloud tools for smoother operations.</p>
+        <!-- <a href="404.html">Select</a> -->
+      </div>
+  
+      <div class="tp-card tp-anim" data-delay="0.4">
+        <div class="tp-img">
+          <img src="./compliance.webp">
+        </div>
+        <i class="fa-solid fa-shield-halved"></i>
+        <h3>Security Compliance</h3>
+        <p>Enterprise-grade protection with secure data handling & access control.</p>
+        <!-- <a href="404.html">Select</a> -->
+      </div>
+  
+      <div class="tp-card tp-anim" data-delay="0.5">
+        <div class="tp-img">
+          <img src="./analytics.webp">
+        </div>
+        <i class="fa-solid fa-chart-line"></i>
+        <h3>Analytics & Insights</h3>
+        <p>Get detailed reports, performance tracking, and actionable insights.</p>
+        <!-- <a href="404.html">Select</a> -->
+      </div>
+  
+      <div class="tp-card tp-anim" data-delay="0.6">
+        <div class="tp-img">
+          <img src="./corp1.webp">
+        </div>
+        <i class="fa-solid fa-users"></i>
+        <h3>Team Collaboration</h3>
+        <p>Built-in communication tools for seamless team collaboration.</p>
+        <!-- <a href="404.html">Select</a> -->
+      </div>
+  
+    </div>
+  
+  </section>
+  
+  <style>
+  
+  /* SECTION */
+  .tp-services{
+    padding:100px 8%;
+    background:#0b0f1a;
+  }
+  
+  /* TITLE */
+  .tp-title{
+    text-align:center;
+    margin-bottom:60px;
+    font-size:36px;
+  }
+  
+  /* GRID */
+  .tp-services-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+  }
+  
+  /* CARD */
+  .tp-card{
+    padding:25px;
+    border-radius:25px;
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(15px);
+    text-align:center;
+    transition:0.4s;
+    position:relative;
+    overflow:hidden;
+  }
+  
+  /* IMAGE */
+  .tp-img{
+    width:100%;
+    height:200px;
+    border-radius:120px; /* CYLINDRICAL */
+    overflow:hidden;
+    margin-bottom:20px;
+  }
+  
+  .tp-img img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:0.5s;
+  }
+  
+  /* ICON */
+  .tp-card i{
+    font-size:24px;
+    margin-bottom:10px;
+    color:#5f5cff;
+  }
+  
+  /* TEXT */
+  .tp-card h3{
+    margin-bottom:10px;
+  }
+  
+  .tp-card p{
+    font-size:14px;
+    opacity:0.8;
+    margin-bottom:15px;
+  }
+  
+  /* BUTTON */
+  .tp-card a{
+    display:inline-block;
+    padding:10px 22px;
+    border-radius:30px;
+    background:#5f5cff;
+    color:#fff;
+    text-decoration:none;
+  }
+  
+  /* HOVER EFFECT */
+  .tp-card:hover{
+    transform:translateY(-10px) scale(1.03);
+  }
+  
+  /* IMAGE ZOOM */
+  .tp-card:hover img{
+    transform:scale(1.1);
+  }
+  
+  /* GLOW */
+  .tp-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(120deg,transparent,rgba(95,92,255,0.3),transparent);
+    opacity:0;
+    transition:0.4s;
+  }
+  
+  .tp-card:hover::before{
+    opacity:1;
+  }
+  
+  /* ANIMATION */
+  .tp-anim{
+    opacity:0;
+    transform:translateY(60px);
+    transition:0.8s ease;
+  }
+  
+  .tp-show{
+    opacity:1 !important;
+    transform:translateY(0) !important;
+  }
+  
+  /* RESPONSIVE */
+  
+  /* LAPTOP */
+  @media(max-width:1200px){
+    .tp-services-grid{
+      grid-template-columns:repeat(2,1fr);
+    }
+  }
+  
+  /* TABLET */
+  @media(max-width:768px){
+    .tp-services-grid{
+      grid-template-columns:1fr;
+    }
+  
+    .tp-title{
+      font-size:28px;
+    }
+  }
+  
+  /* MOBILE */
+  @media(max-width:480px){
+    .tp-services{
+      padding:70px 5%;
+    }
+  
+    .tp-img{
+      height:180px;
+    }
+  }
+  
+  </style>
+  
+  <script>
+  (function(){
+  
+    const section = document.querySelector('.tp-services');
+    if(!section) return;
+  
+    const items = section.querySelectorAll('.tp-anim');
+  
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+  
+          let delay = entry.target.dataset.delay || 0;
+  
+          setTimeout(()=>{
+            entry.target.classList.add('tp-show');
+          }, delay * 1000);
+  
+        }
+      });
+    },{threshold:0.2});
+  
+    items.forEach(el=>observer.observe(el));
+  
+  })();
+
+
+ 
+document.querySelectorAll('.tp-card a').forEach(btn=>{
+  btn.addEventListener('click', function(e){
+    e.preventDefault();
+    window.location.href = "./404.html"; // try ./ or / or pages/
+  });
+});
+</script>
+  
+
+<section class="tp2-pricing">
+
+    <!-- HEADER -->
+    <div class="tp2-head tp2-anim" data-delay="0.1">
+      <div class="tp2-badge">💰 Pricing Plans</div>
+      <h2>Flexible Pricing for Every Business</h2>
+  
+      <!-- TOGGLE -->
+      <div class="tp2-toggle">
+        <span class="active">Monthly</span>
+        <div class="tp2-switch"></div>
+        <span>Yearly</span>
+      </div>
+    </div>
+  
+    <!-- CARDS -->
+    <div class="tp2-grid">
+  
+      <!-- STARTER -->
+      <div class="tp2-card tp2-anim" data-delay="0.2">
+        <h3>Starter</h3>
+        <div class="tp2-price" data-month="9" data-year="90">$9</div>
+  
+        <ul>
+          <li>✔ Ticket Management</li>
+          <li>✔ Basic Automation</li>
+          <li>✔ Email Support</li>
+        </ul>
+  
+        <a href="./404.html">Get Started</a>
+      </div>
+  
+      <!-- PRO -->
+      <div class="tp2-card active tp2-anim" data-delay="0.3">
+  
+        <div class="tp2-popular">🔥 Popular</div>
+  
+        <h3>Pro</h3>
+        <div class="tp2-price" data-month="29" data-year="290">$29</div>
+  
+        <ul>
+          <li>✔ Advanced Automation</li>
+          <li>✔ Analytics Dashboard</li>
+          <li>✔ Priority Support</li>
+        </ul>
+  
+        <a href="./404.html">Get Started</a>
+      </div>
+  
+      <!-- ENTERPRISE -->
+      <div class="tp2-card tp2-anim" data-delay="0.4">
+        <h3>Enterprise</h3>
+        <div class="tp2-price" data-month="79" data-year="790">$79</div>
+  
+        <ul>
+          <li>✔ Full ITSM Suite</li>
+          <li>✔ AI Automation</li>
+          <li>✔ 24/7 Support</li>
+        </ul>
+  
+        <a href="./404.html">Get Started</a>
+      </div>
+  
+    </div>
+  
+  </section>
+  
+  <style>
+  
+  /* SECTION */
+  .tp2-pricing{
+    padding:100px 8%;
+    background:#0b0f1a;
+    text-align:center;
+  }
+  
+  /* BADGE */
+  .tp2-badge{
+    display:inline-block;
+    padding:6px 18px;
+    border-radius:50px;
+    background:rgba(95,92,255,0.15);
+    border:1px solid rgba(95,92,255,0.4);
+    margin-bottom:10px;
+  }
+  
+  /* HEADER */
+  .tp2-head h2{
+    font-size:36px;
+    margin-bottom:20px;
+  }
+  
+  /* TOGGLE */
+  .tp2-toggle{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:15px;
+  }
+  
+  .tp2-toggle span{
+    opacity:0.6;
+  }
+  
+  .tp2-toggle span.active{
+    opacity:1;
+  }
+  
+  .tp2-switch{
+    width:50px;
+    height:25px;
+    background:#222;
+    border-radius:50px;
+    position:relative;
+    cursor:pointer;
+  }
+  
+  .tp2-switch::after{
+    content:"";
+    width:20px;
+    height:20px;
+    background:#5f5cff;
+    border-radius:50%;
+    position:absolute;
+    top:2.5px;
+    left:3px;
+    transition:0.3s;
+  }
+  
+  /* GRID */
+  .tp2-grid{
+    margin-top:60px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+  }
+  
+  /* CARD */
+  .tp2-card{
+    padding:40px 25px;
+    border-radius:25px;
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(15px);
+    transition:0.4s;
+    position:relative;
+  }
+  
+  /* ACTIVE */
+  .tp2-card.active{
+    transform:scale(1.05);
+    border:1px solid rgba(95,92,255,0.5);
+  }
+  
+  /* POPULAR */
+  .tp2-popular{
+    position:absolute;
+    top:15px;
+    right:15px;
+    background:#5f5cff;
+    padding:5px 12px;
+    border-radius:20px;
+    font-size:12px;
+  }
+  
+  /* PRICE */
+  .tp2-price{
+    font-size:40px;
+    margin:15px 0;
+  }
+  
+  /* LIST */
+  .tp2-card ul{
+    list-style:none;
+    padding:0;
+    margin:20px 0;
+  }
+  
+  .tp2-card li{
+    margin:10px 0;
+  }
+  
+  /* BUTTON */
+  .tp2-card a{
+    display:inline-block;
+    padding:12px 28px;
+    border-radius:30px;
+    background:#5f5cff;
+    color:#fff;
+    text-decoration:none;
+  }
+  
+  /* HOVER */
+  .tp2-card:hover{
+    transform:translateY(-10px);
+  }
+  
+  /* ANIMATION */
+  .tp2-anim{
+    opacity:0;
+    transform:translateY(60px);
+    transition:0.8s ease;
+  }
+  
+  .tp2-show{
+    opacity:1 !important;
+    transform:translateY(0) !important;
+  }
+  
+  /* RESPONSIVE */
+  
+  /* LAPTOP */
+  @media(max-width:1200px){
+    .tp2-grid{
+      grid-template-columns:repeat(2,1fr);
+    }
+  }
+  
+  /* TABLET */
+  @media(max-width:768px){
+    .tp2-grid{
+      grid-template-columns:1fr;
+    }
+  
+    .tp2-head h2{
+      font-size:28px;
+    }
+  }
+  
+  /* MOBILE */
+  @media(max-width:480px){
+    .tp2-pricing{
+      padding:70px 5%;
+    }
+  }
+  
+  </style>
+  
+  <script>
+  (function(){
+  
+    const section = document.querySelector('.tp2-pricing');
+    if(!section) return;
+  
+    /* SCROLL ANIMATION */
+    const items = section.querySelectorAll('.tp2-anim');
+  
+    const observer = new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+  
+          let delay = entry.target.dataset.delay || 0;
+  
+          setTimeout(()=>{
+            entry.target.classList.add('tp2-show');
+          }, delay * 1000);
+  
+        }
+      });
+    },{threshold:0.2});
+  
+    items.forEach(el=>observer.observe(el));
+  
+  
+    /* TOGGLE LOGIC */
+    const toggle = section.querySelector('.tp2-switch');
+    const prices = section.querySelectorAll('.tp2-price');
+    const labels = section.querySelectorAll('.tp2-toggle span');
+  
+    let yearly = false;
+  
+    toggle.addEventListener('click', ()=>{
+  
+      yearly = !yearly;
+  
+      toggle.style.background = yearly ? "#5f5cff" : "#222";
+      toggle.querySelector('::after');
+  
+      toggle.style.setProperty('--pos', yearly ? '25px' : '3px');
+  
+      prices.forEach(p=>{
+        p.innerText = "$" + (yearly ? p.dataset.year : p.dataset.month);
+      });
+  
+      labels[0].classList.toggle('active');
+      labels[1].classList.toggle('active');
+  
+    });
+  
+  })();
+  </script>
+
+<section class="itteam-section" id="itteam-section">
+
+    <div class="itteam-container">
+  
+      <!-- HEADER -->
+      <div class="itteam-header itteam-reveal">
+        <h2 style="color:black;">Meet Our Expert Team</h2>
+        <p>Professional minds delivering powerful IT solutions</p>
+      </div>
+  
+      <!-- TEAM GRID -->
+      <div class="itteam-grid">
+  
+        <!-- CARD -->
+        <div class="itteam-card itteam-reveal">
+          <img src="./arjun.webp" alt="">
+          <div class="itteam-overlay">
+            <h3>Arjun Kumar</h3>
+            <span>Full Stack Developer</span>
+             <a href="./404.html">
+            <div class="itteam-social">
+
+              <i class="fab fa-facebook-f"></i>
+              <i class="fab fa-twitter"></i>
+              <i class="fab fa-instagram"></i>
+            </div>
+          </div>
+        </a>
+        </div>
+  
+        <div class="itteam-card itteam-reveal">
+          <img src="./nithiya.webp" alt="">
+          <div class="itteam-overlay">
+            <h3>Priya Sharma</h3>
+            <span>UI/UX Designer</span>
+            <a href="./404.html">
+            <div class="itteam-social">
+              <i class="fab fa-facebook-f"></i>
+              <i class="fab fa-twitter"></i>
+              <i class="fab fa-instagram"></i>
+            </div>
+          </div>
+        </a>
+        </div>
+  
+        <div class="itteam-card itteam-reveal">
+          <img src="./joe.webp" alt="">
+          <div class="itteam-overlay">
+            <h3>Rahul Verma</h3>
+            <span>Cloud Engineer</span>
+            <a href="./404.html">
+            <div class="itteam-social">
+              <i class="fab fa-facebook-f"></i>
+              <i class="fab fa-twitter"></i>
+              <i class="fab fa-instagram"></i>
+            </div>
+          </div>
+        </a>
+        </div>
+  
+        <div class="itteam-card itteam-reveal">
+          <img src="./sana.webp" alt="">
+          <div class="itteam-overlay">
+            <h3>Ananya Reddy</h3>
+            <span>Cybersecurity Analyst</span>
+            <a href="./404.html">
+            <div class="itteam-social">
+              <i class="fab fa-facebook-f"></i>
+              <i class="fab fa-twitter"></i>
+              <i class="fab fa-instagram"></i>
+            </div>
+          </div>
+        </a>
+        </div>
+  
+      </div>
+  
+    </div>
+  
+  </section>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    .itteam-section{
+  padding:100px 6%;
+  
+  color:#fff;
+}
+
+.itteam-container{
+  max-width:1300px;
+  margin:auto;
+}
+
+/* HEADER */
+.itteam-header{
+  text-align:center;
+  margin-bottom:60px;
+}
+
+.itteam-header h2{
+  font-size:40px;
+}
+
+.itteam-header p{
+  opacity:0.7;
+  margin-top:10px;
+}
+
+/* GRID */
+.itteam-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:25px;
+}
+
+/* CARD */
+.itteam-card{
+  position:relative;
+  overflow:hidden;
+  border-radius:100px; /* capsule */
+  height:350px;
+  cursor:pointer;
+  transition:0.5s;
+}
+
+/* IMAGE */
+.itteam-card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:0.6s;
+}
+
+/* OVERLAY */
+.itteam-overlay{
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+  padding:20px;
+  background:linear-gradient(to top,rgba(0,0,0,0.9),transparent);
+  transform:translateY(100%);
+  transition:0.5s;
+}
+
+/* TEXT */
+.itteam-overlay h3{
+  margin-bottom:5px;
+}
+
+.itteam-overlay span{
+  font-size:14px;
+  color:#5f5cff;
+}
+
+/* SOCIAL */
+.itteam-social{
+  margin-top:12px;
+  display:flex;
+  gap:10px;
+}
+
+.itteam-social i{
+  width:35px;
+  height:35px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:rgba(255,255,255,0.1);
+  transition:0.3s;
+}
+
+.itteam-social i:hover{
+  background:#5f5cff;
+  color:#000;
+}
+
+/* HOVER EFFECT */
+.itteam-card:hover{
+  border-radius:30px;
+  transform:scale(1.05);
+}
+
+.itteam-card:hover img{
+  transform:scale(1.15);
+}
+
+.itteam-card:hover .itteam-overlay{
+  transform:translateY(0);
+}
+
+/* SCROLL ANIMATION */
+.itteam-reveal{
+  opacity:0;
+  transform:translateY(80px);
+  transition:0.8s ease;
+}
+
+.itteam-show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .itteam-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:768px){
+  .itteam-header h2{
+    font-size:28px;
+  }
+}
+
+@media(max-width:480px){
+  .itteam-grid{
+    grid-template-columns:1fr;
+  }
+
+  .itteam-card{
+    height:300px;
+  }
+
+  .itteam-section{
+    padding:70px 4%;
+  }
+}
+
+.itteam-reveal{
+  opacity:0;
+  transform:translateY(100px) scale(0.95);
+  transition:0.8s cubic-bezier(.17,.67,.38,1.2);
+}
+
+.itteam-show{
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+  </style>
+
+  <script>
+    (function(){
+
+const section = document.getElementById("itteam-section");
+if(!section) return;
+
+const items = section.querySelectorAll(".itteam-reveal");
+
+function revealStagger(){
+  let delay = 0;
+
+  items.forEach((el, index)=>{
+    const top = el.getBoundingClientRect().top;
+
+    if(top < window.innerHeight - 80){
+      
+      setTimeout(()=>{
+        el.classList.add("itteam-show");
+      }, delay);
+
+      delay += 150; // 🔥 controls stagger speed
+    }
+  });
+}
+
+window.addEventListener("scroll", revealStagger);
+window.addEventListener("load", revealStagger);
+
+})();
+    </script>
+
+
+<!-- ================= FOOTER ================= -->
+<footer class="bio-footer">
+
+    <div class="footer-container">
+  
+      <!-- LOGO + ABOUT -->
+  <div class="footer-col">
+    <img src="./logo.webp" class="footer-logo">
+  
+    <p>
+     IT ticketing Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+      Optio expedita dicta veritatis facilis aliquam in impedit omnis fuga enim iusto?
+      
+    </p>
+  
+    <!-- FOLLOW US -->
+    <h4 class="follow-title">Follow Us</h4>
+  
+    <div class="social-icons">
+      <a href="404.html"><i class="ri-facebook-fill"></i></a>
+      <a href="404.html"><i class="ri-twitter-x-line"></i></a>
+      <a href="404.html"><i class="ri-instagram-line"></i></a>
+      <a href="404.html"><i class="ri-linkedin-fill"></i></a>
+     
+    </div>
+  </div>
+  
+      <!-- QUICK LINKS -->
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+            
+      <li><a href="./index.html">HOME</a></li>
+        <li><a href="./about.html">ABOUT</a></li>
+            <li><a href="./service.html">SERVICES</a></li>
+            <li><a href="./Ticket.html">TICKET</a></li>
+                
+                    <li><a href="./contact.html">CONTACT</a></li>
+        </ul>
+      </div>
+  
+      <!-- LAB SERVICES -->
+      <div class="footer-col">
+        <h4>Our Process</h4>
+        <ul>
+            <li><a href="404.html">IT Management</a></li>
+            <li><a href="404.html">Workflow Automation</a></li>
+            <li><a href="404.html">Cloud Integration</a></li>
+            <li><a href="404.html">Security </a></li>
+            <li><a href="404.html">Team collaboration</a></li>
+        </ul>
+      </div>
+  
+      <!-- LOCATION -->
+      <div class="footer-col">
+        <h4>Location</h4>
+        <div class="map">
+          <iframe src="https://www.google.com/maps?q=Salem%20Tamil%20Nadu&output=embed"></iframe>
+        </div>
+      </div>
+  
+      <!-- SUBSCRIBE -->
+      <div class="footer-col">
+        <h4>Research Updates</h4>
+  
+        <div class="subscribe">
+          <input type="email" id="email" placeholder="Enter Email">
+          <button onclick="subscribe()">Subscribe</button>
+        </div>
+  
+        <span id="msg"></span>
+      </div>
+  
+    </div>
+  
+    <!-- BOTTOM -->
+    <div class="footer-bottom">
+      <p>
+        © 2026 BioGen | All Rights Reserved |
+        <a href="404.html">Privacy Policy</a> |
+        <a href="404.html">Terms & Conditions</a>
+      </p>
+    </div>
+  
+  </footer>
+  
+  <style>
+    /* FOLLOW TITLE */
+  .follow-title {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #813ddf;
+  }
+  
+  /* SOCIAL ICONS */
+  .social-icons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  
+  /* ICON STYLE */
+  .social-icons a {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+    font-size: 18px;
+    color: #fff;
+    transition: 0.3s ease;
+  }
+  
+  /* HOVER EFFECT (BIO GLOW) */
+  .social-icons a:hover {
+    /* background: #00f7ff; */
+    color: #000;
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 0 15px #813ddf;
+  }
+  
+  /* MOBILE CENTER ALIGN */
+  @media (max-width: 480px) {
+    .social-icons {
+      justify-content: center;
+    }
+  
+    .follow-title {
+      text-align: center;
+    }
+  }
+    /* PRE FOOTER */
+  .pre-footer {
+    background: #0a0f1a;
+    padding: 40px 20px;
+  }
+  
+  .pre-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .pre-box {
+    flex: 1;
+    min-width: 250px;
+    text-align: center;
+    color: #fff;
+  }
+  
+  .pre-box i {
+    font-size: 30px;
+    color: #813ddf;
+    margin-bottom: 10px;
+  }
+  
+  /* FOOTER */
+  .bio-footer {
+    background: #05070d;
+    color: #fff;
+    padding: 60px 20px;
+  }
+  
+  .footer-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 30px;
+  }
+  
+  /* LOGO */
+  .footer-logo {
+    width: 140px;
+    margin-bottom: 10px;
+  }
+  
+  /* TEXT */
+  .footer-col p {
+    font-size: 14px;
+    color: #aaa;
+  }
+  
+  /* LINKS */
+  .footer-col h4 {
+    margin-bottom: 15px;
+    color: #813ddf;
+  }
+  
+  .footer-col ul {
+    list-style: none;
+  }
+  
+  .footer-col ul li {
+    margin-bottom: 10px;
+  }
+  
+  .footer-col ul li a {
+    color: #aaa;
+    text-decoration: none;
+  }
+  
+  .footer-col ul li a:hover {
+    color: #813ddf;
+  }
+  
+  /* SOCIAL */
+  .social-icons a {
+    margin-right: 10px;
+    font-size: 20px;
+    color: #fff;
+  }
+  
+  .social-icons a:hover {
+    color: #813ddf;
+  }
+  
+  /* MAP */
+  .map iframe {
+    width: 100%;
+    height: 180px;
+    border: 0;
+    border-radius: 10px;
+  }
+  
+  /* SUBSCRIBE */
+  .subscribe {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .subscribe input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+  }
+  
+  .subscribe button {
+    padding: 10px;
+    background: #813ddf;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* MESSAGE */
+  #msg {
+    display: block;
+    margin-top: 8px;
+    font-size: 13px;
+  }
+  
+  /* BOTTOM */
+  .footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    border-top: 1px solid #222;
+    padding-top: 15px;
+    font-size: 14px;
+  }
+  
+  .footer-bottom a {
+    color: #813ddf;
+    text-decoration: none;
+  }
+  
+  /* ================= RESPONSIVE ================= */
+  
+  /* TABLET */
+  @media (max-width: 1024px) {
+    .footer-container {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .footer-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .subscribe {
+      flex-direction: column;
+    }
+  }
+  
+  /* SMALL MOBILE */
+  @media (max-width: 480px) {
+    .footer-container {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+  
+    .social-icons {
+      margin-top: 10px;
+    }
+  }
+    </style>
+  
+  <script>
+    function subscribe() {
+      let email = document.getElementById("email").value;
+      let msg = document.getElementById("msg");
+    
+      let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    
+      if (email === "" || !email.match(pattern)) {
+        msg.style.color = "red";
+        msg.innerText = "Please fill correct mail id";
+        return;
+      }
+    
+      setTimeout(() => {
+      window.location.href = "404.html";
+    });
+    }
+    </script>
+
+    
+    </body>
+    </html>
