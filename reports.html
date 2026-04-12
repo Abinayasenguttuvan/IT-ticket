@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reports</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+/* ===== THEME ===== */
+:root{
+  --bg:#0f172a;
+  --card:#020617;
+  --text:#fff;
+  --accent:#00eaff;
+}
+body.light{
+  --bg:#f1f5f9;
+  --card:#fff;
+  --text:#000;
+}
+
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
+
+body{
+  display:flex;
+  background:var(--bg);
+  color:var(--text);
+}
+
+/* SIDEBAR */
+.sidebar{
+  width:250px;
+  height:100vh;
+  background:var(--card);
+  padding:20px;
+  position:fixed;
+}
+
+.sidebar h2{color:var(--accent);margin-bottom:20px;}
+
+.sidebar a{
+  display:block;
+  padding:12px;
+  color:var(--text);
+  text-decoration:none;
+  margin-bottom:10px;
+  border-radius:8px;
+}
+
+.sidebar a:hover{
+  background:var(--accent);
+  color:#000;
+}
+
+/* MAIN */
+.main{
+  margin-left:250px;
+  width:100%;
+  padding:20px;
+}
+
+/* TOPBAR */
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+  flex-wrap:wrap;
+}
+
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.toggle{
+  cursor:pointer;
+  color:var(--accent);
+}
+
+/* PROFILE */
+.profile{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.profile img{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  border:2px solid var(--accent);
+}
+
+.profile-info{
+  font-size:12px;
+}
+
+/* CARDS */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:15px;
+  margin-bottom:20px;
+}
+
+.card{
+  background:var(--card);
+  padding:15px;
+  border-radius:10px;
+  text-align:center;
+}
+
+/* CHARTS */
+.charts{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:20px;
+}
+
+.chart-box{
+  background:var(--card);
+  padding:15px;
+  border-radius:10px;
+}
+
+canvas{
+  width:100% !important;
+  max-height:300px;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .sidebar{width:70px;}
+  .sidebar h2{display:none;}
+  .main{margin-left:70px;}
+}
+
+@media(max-width:480px){
+  .main{margin-left:0;}
+  .topbar{flex-direction:column;align-items:flex-start;}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <h2>Admin</h2>
+  <a href="./admin.html"><i class="fa fa-home"></i> Dashboard</a>
+  <a href="./tickets.html"><i class="fa fa-ticket"></i> Tickets</a>
+  <a href="./users.html"><i class="fa fa-users"></i> Users</a>
+  <a href="./reports.html"><i class="fa fa-chart-line"></i> Reports</a>
+  <a href="./login.html"><i class="fa fa-sign-out"></i> Logout</a>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <h2>Reports Dashboard</h2>
+
+    <div class="top-actions">
+      <i class="fa fa-moon toggle" onclick="toggleTheme()"></i>
+
+      <div class="profile">
+        <img src="./ava1.webp">
+        <div class="profile-info">
+          <div id="userEmail">Loading...</div>
+          <div id="userRole" style="color:var(--accent);"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARDS -->
+  <div class="cards">
+    <div class="card"><h3 id="total">0</h3><p>Total Tickets</p></div>
+    <div class="card"><h3 id="open">0</h3><p>Open</p></div>
+    <div class="card"><h3 id="closed">0</h3><p>Closed</p></div>
+    <div class="card"><h3 id="pending">0</h3><p>Pending</p></div>
+  </div>
+
+  <!-- CHARTS -->
+  <div class="charts">
+    <div class="chart-box">
+      <h4>Ticket Status</h4>
+      <canvas id="barChart"></canvas>
+    </div>
+
+    <div class="chart-box">
+      <h4>Priority Distribution</h4>
+      <canvas id="pieChart"></canvas>
+    </div>
+
+    <div class="chart-box">
+      <h4>Overall Distribution</h4>
+      <canvas id="donutChart"></canvas>
+    </div>
+  </div>
+
+</div>
+
+<script>
+
+/* ===== USER DISPLAY FIX ===== */
+let user = null;
+
+try{
+  user = JSON.parse(localStorage.getItem("user"));
+}catch(e){}
+
+if(user){
+  userEmail.innerText = user.email;
+  userRole.innerText = user.role.toUpperCase();
+}else{
+  userEmail.innerText = "admin@gmail.com";
+  userRole.innerText = "ADMIN";
+}
+
+/* THEME */
+function toggleTheme(){
+  document.body.classList.toggle("light");
+}
+
+/* ===== DATA ===== */
+let tickets = JSON.parse(localStorage.getItem("tickets")) || [];
+
+let open = tickets.filter(t=>t.status==="Open").length;
+let closed = tickets.filter(t=>t.status==="Closed").length;
+let pending = tickets.filter(t=>t.status==="Pending").length;
+
+document.getElementById("total").innerText = tickets.length;
+document.getElementById("open").innerText = open;
+document.getElementById("closed").innerText = closed;
+document.getElementById("pending").innerText = pending;
+
+/* ===== CHARTS ===== */
+
+/* BAR */
+new Chart(document.getElementById("barChart"),{
+  type:"bar",
+  data:{
+    labels:["Open","Closed","Pending"],
+    datasets:[{
+      label:"Tickets",
+      data:[open,closed,pending]
+    }]
+  }
+});
+
+/* PIE */
+new Chart(document.getElementById("pieChart"),{
+  type:"pie",
+  data:{
+    labels:["Open","Closed","Pending"],
+    datasets:[{
+      data:[open,closed,pending]
+    }]
+  }
+});
+
+/* DONUT */
+new Chart(document.getElementById("donutChart"),{
+  type:"doughnut",
+  data:{
+    labels:["Open","Closed","Pending"],
+    datasets:[{
+      data:[open,closed,pending]
+    }]
+  }
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tickets</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+/* ===== THEME ===== */
+:root{
+  --bg:#0f172a;
+  --card:#020617;
+  --text:#fff;
+  --accent:#00eaff;
+}
+
+body.light{
+  --bg:#f1f5f9;
+  --card:#fff;
+  --text:#000;
+}
+
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
+
+body{
+  display:flex;
+  background:var(--bg);
+  color:var(--text);
+}
+
+/* SIDEBAR */
+.sidebar{
+  width:250px;
+  height:100vh;
+  background:var(--card);
+  padding:20px;
+  position:fixed;
+}
+
+.sidebar h2{color:var(--accent);margin-bottom:20px;}
+
+.sidebar a{
+  display:block;
+  padding:12px;
+  color:var(--text);
+  text-decoration:none;
+  margin-bottom:10px;
+  border-radius:8px;
+}
+
+.sidebar a:hover{
+  background:var(--accent);
+  color:#000;
+}
+
+/* MAIN */
+.main{
+  margin-left:250px;
+  width:100%;
+  padding:20px;
+}
+
+/* TOPBAR */
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.toggle{
+  cursor:pointer;
+  font-size:18px;
+  color:var(--accent);
+}
+
+/* PROFILE */
+.profile{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.profile img{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  border:2px solid var(--accent);
+}
+
+.profile-info{
+  font-size:12px;
+}
+
+/* CARDS */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:15px;
+  margin-bottom:20px;
+}
+
+.card{
+  background:var(--card);
+  padding:15px;
+  border-radius:10px;
+  text-align:center;
+}
+
+/* FILTERS */
+.filters{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:15px;
+}
+
+.filters input,
+.filters select{
+  padding:10px;
+  border-radius:8px;
+  border:none;
+}
+
+/* BUTTON */
+.btn{
+  padding:10px 15px;
+  background:var(--accent);
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+/* TABLE */
+.table-container{
+  background:var(--card);
+  padding:15px;
+  border-radius:10px;
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  min-width:800px;
+  border-collapse:collapse;
+}
+
+th,td{
+  padding:12px;
+}
+
+th{color:var(--accent);}
+
+tr{border-bottom:1px solid rgba(255,255,255,0.1);}
+
+/* BADGES */
+.badge{
+  padding:5px 10px;
+  border-radius:20px;
+  font-size:12px;
+}
+
+.open{background:#facc15;color:#000;}
+.closed{background:#22c55e;color:#000;}
+.pending{background:#3b82f6;}
+.critical{background:#ef4444;}
+
+/* MODAL */
+.modal{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:rgba(0,0,0,0.7);
+  display:none;
+  justify-content:center;
+  align-items:center;
+}
+
+.modal-content{
+  background:var(--card);
+  padding:20px;
+  border-radius:10px;
+  width:300px;
+}
+
+.modal input,.modal select{
+  width:100%;
+  margin-bottom:10px;
+  padding:10px;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .sidebar{width:70px;}
+  .sidebar h2{display:none;}
+  .sidebar a{text-align:center;}
+  .main{margin-left:70px;}
+}
+
+@media(max-width:500px){
+  .topbar{flex-direction:column;align-items:flex-start;}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <h2>Admin</h2>
+  <a href="./admin.html"><i class="fa fa-home"></i> Dashboard</a>
+  <a href="./tickets.html"><i class="fa fa-ticket"></i> Tickets</a>
+  <a href="./users.html"><i class="fa fa-users"></i> Users</a>
+  <a href="./reports.html"><i class="fa fa-chart-line"></i> Reports</a>
+  <a href="./login.html" onclick="logout()"><i class="fa fa-sign-out"></i> Logout</a>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <h2>Tickets</h2>
+
+    <div class="top-actions">
+      <i class="fa fa-moon toggle" onclick="toggleTheme()" id="themeIcon"></i>
+
+      <div class="profile">
+        <img src="./ava1.webp">
+        <div class="profile-info">
+          <div id="userEmail"></div>
+          <div id="userRole"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARDS -->
+  <div class="cards">
+    <div class="card"><h3 id="total">0</h3><p>Total Tickets</p></div>
+    <div class="card"><h3 id="openCount">0</h3><p>Open</p></div>
+    <div class="card"><h3 id="closedCount">0</h3><p>Closed</p></div>
+    <div class="card"><h3 id="criticalCount">0</h3><p>Critical</p></div>
+  </div>
+
+  <!-- FILTERS -->
+  <div class="filters">
+    <input type="text" id="search" placeholder="Search...">
+    <select id="statusFilter">
+      <option value="">All Status</option>
+      <option>Open</option>
+      <option>Closed</option>
+      <option>Pending</option>
+    </select>
+    <select id="priorityFilter">
+      <option value="">All Priority</option>
+      <option>Critical</option>
+      <option>Medium</option>
+      <option>Low</option>
+    </select>
+    <button class="btn" onclick="openModal()">+ Add</button>
+  </div>
+
+  <!-- TABLE -->
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Issue</th>
+          <th>Status</th>
+          <th>Priority</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <h3>Add Ticket</h3>
+    <input id="issue" placeholder="Issue">
+    <select id="status">
+      <option>Open</option>
+      <option>Closed</option>
+      <option>Pending</option>
+    </select>
+    <select id="priority">
+      <option>Critical</option>
+      <option>Medium</option>
+      <option>Low</option>
+    </select>
+    <button class="btn" onclick="addTicket()">Save</button>
+  </div>
+</div>
+
+<script>
+
+/* USER */
+const user = JSON.parse(localStorage.getItem("user")) || JSON.parse(sessionStorage.getItem("user"));
+if(user){
+  userEmail.innerText = user.email;
+  userRole.innerText = user.role;
+}
+
+/* THEME */
+function toggleTheme(){
+  document.body.classList.toggle("light");
+}
+
+/* DATA */
+let tickets = JSON.parse(localStorage.getItem("tickets")) || [];
+
+function render(){
+  let tbody = tableBody;
+  tbody.innerHTML="";
+
+  let search = document.getElementById("search").value.toLowerCase();
+  let sf = statusFilter.value;
+  let pf = priorityFilter.value;
+
+  let filtered = tickets.filter(t =>
+    t.issue.toLowerCase().includes(search) &&
+    (!sf || t.status===sf) &&
+    (!pf || t.priority===pf)
+  );
+
+  filtered.forEach((t,i)=>{
+    tbody.innerHTML+=`
+    <tr>
+      <td>#${i+1}</td>
+      <td>${t.issue}</td>
+      <td><span class="badge ${t.status.toLowerCase()}">${t.status}</span></td>
+      <td><span class="badge ${t.priority.toLowerCase()}">${t.priority}</span></td>
+      <td>
+        <i class="fa fa-edit" onclick="toggleStatus(${i})"></i>
+        <i class="fa fa-trash" onclick="deleteTicket(${i})"></i>
+      </td>
+    </tr>`;
+  });
+
+  total.innerText = tickets.length;
+  openCount.innerText = tickets.filter(t=>t.status==="Open").length;
+  closedCount.innerText = tickets.filter(t=>t.status==="Closed").length;
+  criticalCount.innerText = tickets.filter(t=>t.priority==="Critical").length;
+}
+
+/* FUNCTIONS */
+function addTicket(){
+  tickets.push({
+    issue:issue.value,
+    status:status.value,
+    priority:priority.value
+  });
+  localStorage.setItem("tickets",JSON.stringify(tickets));
+  modal.style.display="none";
+  render();
+}
+
+function deleteTicket(i){
+  tickets.splice(i,1);
+  localStorage.setItem("tickets",JSON.stringify(tickets));
+  render();
+}
+
+function toggleStatus(i){
+  tickets[i].status = tickets[i].status==="Open"?"Closed":"Open";
+  localStorage.setItem("tickets",JSON.stringify(tickets));
+  render();
+}
+
+function openModal(){ modal.style.display="flex"; }
+
+/* EVENTS */
+search.addEventListener("input",render);
+statusFilter.addEventListener("change",render);
+priorityFilter.addEventListener("change",render);
+
+render();
+
+</script>
+
+</body>
+</html>

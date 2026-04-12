@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+/* ===== THEME VARIABLES ===== */
+:root{
+  --bg:#0f172a;
+  --card:#020617;
+  --text:#ffffff;
+  --accent:#00eaff;
+}
+
+body.light{
+  --bg:#f1f5f9;
+  --card:#ffffff;
+  --text:#0f172a;
+}
+
+/* RESET */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  display:flex;
+  background:var(--bg);
+  color:var(--text);
+  transition:0.3s;
+}
+
+/* SIDEBAR */
+.sidebar{
+  width:250px;
+  height:100vh;
+  background:var(--card);
+  padding:20px;
+  position:fixed;
+}
+
+.sidebar h2{
+  color:var(--accent);
+  margin-bottom:30px;
+}
+
+.sidebar a{
+  display:block;
+  color:var(--text);
+  padding:12px;
+  text-decoration:none;
+  border-radius:8px;
+  margin-bottom:10px;
+}
+
+.sidebar a:hover{
+  background:var(--accent);
+  color:#000;
+}
+
+/* MAIN */
+.main{
+  margin-left:250px;
+  width:100%;
+  padding:20px;
+}
+
+/* TOPBAR */
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+/* TOGGLE */
+.toggle{
+  cursor:pointer;
+  font-size:20px;
+  color:var(--accent);
+}
+
+/* PROFILE */
+.profile{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.profile img{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  border:2px solid var(--accent);
+}
+
+.profile-info{
+  font-size:12px;
+}
+
+/* CARDS */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:15px;
+  margin-bottom:20px;
+}
+
+.card{
+  background:var(--card);
+  padding:20px;
+  border-radius:12px;
+  text-align:center;
+}
+
+.card h3{
+  color:var(--accent);
+}
+
+/* CHARTS */
+.charts{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:20px;
+}
+
+.chart-box{
+  background:var(--card);
+  padding:20px;
+  border-radius:12px;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .sidebar{
+    width:70px;
+  }
+  .sidebar h2{
+    display:none;
+  }
+  .sidebar a{
+    text-align:center;
+    font-size:18px;
+  }
+  .main{
+    margin-left:70px;
+  }
+}
+
+@media(max-width:500px){
+  .topbar{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:10px;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <h2>Admin</h2>
+  <a href="./admin.html"><i class="fa fa-home"></i> Dashboard</a>
+  <a href="./tickets.html"><i class="fa fa-ticket"></i> Tickets</a>
+  <a href="./users.html"><i class="fa fa-users"></i> Users</a>
+  <a href="./reports.html"><i class="fa fa-chart-line"></i> Reports</a>
+  <a href="./login.html" onclick="logout()"><i class="fa fa-sign-out"></i>Logout</a>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <h2>Admin Dashboard</h2>
+
+    <div class="top-actions">
+
+      <!-- THEME TOGGLE -->
+      <i class="fa fa-moon toggle" onclick="toggleTheme()" id="themeIcon"></i>
+
+      <!-- PROFILE -->
+      <div class="profile">
+        <img src="./ava1.webp">
+        <div class="profile-info">
+          <div id="userEmail"></div>
+          <div id="userRole" style="color:var(--accent);"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CARDS -->
+  <div class="cards">
+    <div class="card"><h3>120</h3><p>Total Tickets</p></div>
+    <div class="card"><h3>45</h3><p>Open</p></div>
+    <div class="card"><h3>75</h3><p>Resolved</p></div>
+    <div class="card"><h3>10</h3><p>Critical</p></div>
+  </div>
+
+  <!-- CHARTS -->
+  <div class="charts">
+    <div class="chart-box"><canvas id="barChart"></canvas></div>
+    <div class="chart-box"><canvas id="pieChart"></canvas></div>
+    <div class="chart-box"><canvas id="lineChart"></canvas></div>
+    <div class="chart-box"><canvas id="donutChart"></canvas></div>
+  </div>
+
+</div>
+
+<script>
+
+/* USER LOAD */
+const user = JSON.parse(localStorage.getItem("user")) || JSON.parse(sessionStorage.getItem("user"));
+
+if(!user || user.role !== "admin"){
+  window.location.href = "login.html";
+} else {
+  document.getElementById("userEmail").innerText = user.email;
+  document.getElementById("userRole").innerText = user.role.toUpperCase();
+}
+
+/* LOGOUT */
+function logout(){
+  localStorage.clear();
+  sessionStorage.clear();
+  window.location.href = "login.html";
+}
+
+/* THEME */
+function toggleTheme(){
+  document.body.classList.toggle("light");
+
+  const theme = document.body.classList.contains("light") ? "light" : "dark";
+  localStorage.setItem("theme", theme);
+
+  updateIcon();
+}
+
+function updateIcon(){
+  const icon = document.getElementById("themeIcon");
+  if(document.body.classList.contains("light")){
+    icon.classList.remove("fa-moon");
+    icon.classList.add("fa-sun");
+  } else {
+    icon.classList.remove("fa-sun");
+    icon.classList.add("fa-moon");
+  }
+}
+
+/* LOAD THEME */
+window.onload = () => {
+  const savedTheme = localStorage.getItem("theme");
+  if(savedTheme === "light"){
+    document.body.classList.add("light");
+  }
+  updateIcon();
+};
+
+/* CHARTS */
+new Chart(barChart,{type:"bar",data:{labels:["Mon","Tue","Wed","Thu","Fri"],datasets:[{data:[12,19,8,15,10]}]}});
+
+new Chart(pieChart,{type:"pie",data:{labels:["Open","Closed","Pending"],datasets:[{data:[30,50,20]}]}});
+
+new Chart(lineChart,{type:"line",data:{labels:["Jan","Feb","Mar","Apr","May"],datasets:[{data:[10,20,15,30,25]}]}});
+
+new Chart(donutChart,{type:"doughnut",data:{labels:["Critical","Medium","Low"],datasets:[{data:[10,40,50]}]}});
+
+</script>
+
+</body>
+</html>

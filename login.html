@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IT Ticketing Login</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+/* RESET */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:url('./im2.webp') no-repeat center/cover;
+  position:relative;
+}
+
+body::before{
+  content:'';
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.7);
+}
+
+/* CONTAINER */
+.container{
+  position:relative;
+  z-index:1;
+  width:90%;
+  max-width:1100px;
+  display:flex;
+  border-radius:20px;
+  overflow:hidden;
+  backdrop-filter:blur(15px);
+  box-shadow:0 10px 40px rgba(0,0,0,0.6);
+}
+
+/* LEFT */
+.login-left{
+  flex:1;
+  padding:50px 40px;
+  background:rgba(255,255,255,0.05);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.login-left h2{
+  color:#00eaff;
+  margin-bottom:30px;
+}
+
+/* INPUT */
+.form-group{
+  margin-bottom:18px;
+  display:flex;
+  flex-direction:column;
+}
+
+.form-group label{
+  font-size:13px;
+  margin-bottom:5px;
+  color:#bbb;
+}
+
+.form-group input,
+.form-group select{
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  background:rgba(255,255,255,0.1);
+  color:#fff;
+  outline:none;
+}
+
+.form-group input:focus,
+.form-group select:focus{
+  background:rgba(255,255,255,0.2);
+}
+
+/* REMEMBER */
+.remember{
+  display:flex;
+  justify-content:space-between;
+  font-size:12px;
+  margin-bottom:20px;
+  color:#ccc;
+}
+
+.remember a{
+  color:#00eaff;
+  text-decoration:none;
+}
+
+/* BUTTON */
+.btn{
+  padding:14px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(90deg,#00eaff,#0077ff);
+  color:#000;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+}
+
+/* RIGHT */
+.login-right{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  background:rgba(0,0,0,0.3);
+  padding:40px;
+}
+
+.login-right img{
+  width:110px;
+  border-radius:50%;
+  margin-bottom:20px;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .container{flex-direction:column;}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- LEFT -->
+  <div class="login-left">
+
+    <h2>IT Ticketing Login</h2>
+
+    <div class="form-group">
+      <label>Account Type</label>
+      <select id="role">
+        <option value="admin">Admin</option>
+        <option value="tester">Tester</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" id="email" placeholder="Enter email">
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="password" placeholder="Enter password">
+    </div>
+
+    <div class="remember">
+      <label><input type="checkbox" id="remember"> Remember</label>
+      <a href="./register.html">Forgot?</a>
+    </div>
+    
+
+    <button class="btn" onclick="login()">Login</button><br><br>
+
+    <!-- ADD THIS inside your login-left (below button) -->
+
+<div class="signup" style="color:white;">
+    Don’t have an account?
+    <a href="register.html" style="color:white;">Register</a>
+  </div>
+
+  </div>
+
+  <!-- RIGHT -->
+  <div class="login-right">
+    <img src="./logo.webp" alt="logo">
+    <h3 style="color:white;">IT Support System</h3>
+    <p style="color:#bbb;">Manage & resolve tickets efficiently</p>
+  </div>
+
+</div>
+
+<script>
+    const user = {
+  email: email,
+  role: accountType
+};
+
+localStorage.setItem("user", JSON.stringify(user));
+
+// AUTO LOGIN
+window.onload = () => {
+  const user = localStorage.getItem("user") || sessionStorage.getItem("user");
+  if(user){
+    const data = JSON.parse(user);
+    redirect(data.role);
+  }
+};
+
+function login(){
+  const role = document.getElementById("role").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const remember = document.getElementById("remember").checked;
+
+  if(email === "" || password === ""){
+    alert("Enter email & password");
+    return;
+  }
+
+  const user = {email, role};
+
+  if(remember){
+    localStorage.setItem("user", JSON.stringify(user));
+  } else {
+    sessionStorage.setItem("user", JSON.stringify(user));
+  }
+
+  redirect(role);
+}
+
+function redirect(role){
+  if(role === "admin"){
+    window.location.href = "admin.html";
+  } else if(role === "tester"){
+    window.location.href = "tester.html";
+  }
+}
+
+</script>
+
+</body>
+</html>

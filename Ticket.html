@@ -427,13 +427,858 @@
     </script>
 
 
+<!-- ===== PAGE TITLE ===== -->
+<section class="ticket-title" style="text-align:center; background-image: url('./img1.webp'); padding:120px 20px;">
+    <h1 style="font-size:2.5rem; color:#333;">Ticket Management</h1>
+    <p style="color:#040404;">Create a new ticket or manage existing ones.</p>
+  </section>
+  
+  <!-- ===== CREATE TICKET FORM ===== -->
+  <section class="create-ticket" style="max-width:600px; margin:40px auto; padding:30px; background-color:rgb(162, 207, 209); border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1) ;">
+    <h2 style="text-align:center; margin-bottom:20px; color:black;">Create New Ticket</h2>
+  
+    <form id="ticketForm">
+      <div class="form-group" style="margin-bottom:15px;">
+        <label style="display:block; margin-bottom:5px; color:black;">Issue Title</label>
+        <input type="text" id="title" placeholder="Enter issue title" required style="width:100%; padding:10px; border-radius:5px; border:3px solid #4594d0;">
+      </div>
+  
+      <div class="form-group" style="margin-bottom:15px;">
+        <label style="display:block; margin-bottom:5px; color:black;">Description</label>
+        <textarea id="description" placeholder="Describe your issue" required style="width:100%; padding:10px; border-radius:5px;  border:3px solid #4594d0;"></textarea>
+      </div>
+  
+      <div class="form-group" style="margin-bottom:15px;">
+        <label style="display:block; margin-bottom:5px; color:black;">Priority</label>
+        <select id="priority" style="width:100%; padding:10px; border-radius:5px;  border:3px solid #4594d0;">
+          <option value="Low">Low</option>
+          <option value="Medium" selected>Medium</option>
+          <option value="High">High</option>
+          <option value="Critical">Critical</option>
+        </select>
+      </div>
+  
+      <div class="form-group" style="margin-bottom:20px;">
+        <label style="display:block; margin-bottom:5px; color:black;">Department</label>
+        <select id="department" style="width:100%; padding:10px; border-radius:5px; border:3px solid #4594d0;">
+          <option>IT Support</option>
+          <option>HR</option>
+          <option>Network</option>
+          <option>Admin</option>
+        </select>
+      </div>
+  
+      <button type="button" class="submit-btn" 
+        style="width:100%; padding:12px; background-color:rgb(58, 123, 136); color:white; border:none; border-radius:5px; cursor:pointer; font-size:1rem; transition:all 0.3s ease;"
+        onmouseover="this.style.backgroundColor='#0056b3'; this.style.transform='scale(1.05)';"
+        onmouseout="this.style.backgroundColor='#007BFF'; this.style.transform='scale(1)';"
+        onclick="
+          if(!document.getElementById('title').value || 
+             !document.getElementById('description').value) {
+            alert('Please fill all details');
+          } else {
+            window.location.href='404.html';
+          }
+        ">
+        Submit Ticket
+      </button>
+    </form>
+  </section>
+  
+  <!-- ===== RESPONSIVE MEDIA QUERY ===== -->
+  <style>
+    @media (max-width: 768px) {
+      .create-ticket {
+        margin: 20px;
+        padding: 20px;
+      }
+      .ticket-title h1 {
+        font-size: 2rem;
+      }
+    }
+  
+    @media (max-width: 480px) {
+      .ticket-title h1 {
+        font-size: 1.5rem;
+      }
+      .ticket-title p {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+  
+  <!-- ===== SEARCH + FILTER ===== -->
+  <!-- <section class="filters">
+    <input type="text" id="searchBox" placeholder="Search Tickets...">
+    
+    <select id="filterPriority">
+      <option>All Priorities</option>
+      <option>Low</option>
+      <option>Medium</option>
+      <option>High</option>
+      <option>Critical</option>
+    </select>
+  
+    <select id="filterStatus">
+      <option>All Status</option>
+      <option>Open</option>
+      <option>In Progress</option>
+      <option>Resolved</option>
+    </select>
+  </section>
+   -->
+  <!-- ===== VIEW TICKETS TABLE ===== -->
+  <!-- <section class="ticket-table">
+    <h2>View Tickets</h2>
+  
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Issue</th>
+          <th>Priority</th>
+          <th>Status</th>
+          <th>Department</th>
+        </tr>
+      </thead>
+  
+      <tbody id="ticketList">
+         Tickets added by JS -->
+      <!-- </tbody>
+    </table>
+  </section>
+ --> 
+
+<style>
+    /* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    
+  }
+  
+  /* PAGE TITLE */
+  .ticket-title {
+    
+    padding-top: 120px;
+    text-align: center;
+  }
+  .ticket-title h1 { font-size: 36px; }
+  .ticket-title p { margin-top: 5px; color: #6b7280; }
+  
+  /* CREATE TICKET FORM */
+  .create-ticket {
+    width: 90%;
+    max-width: 750px;
+   background:rgba(95,92,255,0.4);
+    margin: 30px auto;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+  }
+  
+  .create-ticket h2 {
+    margin-bottom: 15px;
+    color: #111827;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input, textarea, select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    font-size: 15px;
+  }
+  
+  textarea { height: 120px; }
+  
+  .submit-btn {
+    background: #4f46e5;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  /* FILTER BAR */
+  .filters {
+    width: 90%;
+    margin: 30px auto;
+    display: flex;
+    gap: 15px;
+  }
+  
+  .filters input, .filters select {
+    padding: 12px;
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+  }
+  
+  /* TICKET TABLE */
+  .ticket-table {
+    width: 100%;
+    margin: auto;
+  }
+  
+  .ticket-table h2 {
+    margin-bottom: 10px;
+    color: #111827;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  th {
+    background: #111827;
+    color: white;
+    padding: 12px;
+  }
+  
+  td {
+    padding: 12px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  tr:hover {
+    background: #f9fafb;
+  }
+  
+  /* RESPONSIVE MEDIA QUERY */
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 65px; right: 0;
+      width: 100%;
+      background: #111827;
+      text-align: center;
+      padding: 20px 0;
+      flex-direction: column;
+    }
+    .nav-links li {  }
+    .menu-icon { display: block; }
+    .nav-links.active { display: flex; }
+  
+    .filters { flex-direction: column; }
+    table { font-size: 14px; }
+  }
+  
+  
+</style>
+
+<script>
+
+
+// ===== TICKET SYSTEM =====
+let ticketCount = 1;
+let ticketList = document.getElementById("ticketList");
+
+document.getElementById("ticketForm").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  let title = document.getElementById("title").value;
+  let desc = document.getElementById("description").value;
+  let priority = document.getElementById("priority").value;
+  let dept = document.getElementById("department").value;
+
+  let row = `
+    <tr>
+      <td>${ticketCount++}</td>
+      <td>${title}</td>
+      <td>${priority}</td>
+      <td>Open</td>
+      <td>${dept}</td>
+    </tr>
+  `;
+
+  ticketList.innerHTML += row;
+
+  this.reset();
+});
+
+// ===== SEARCH FILTER =====
+document.getElementById("searchBox").addEventListener("keyup", function(){
+  let search = this.value.toLowerCase();
+  let rows = ticketList.getElementsByTagName("tr");
+
+  for(let i = 0; i < rows.length; i++){
+    let text = rows[i].innerText.toLowerCase();
+    rows[i].style.display = text.includes(search) ? "" : "none";
+  }
+});
+</script>
 
 
 
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+<!-- PROFILE LOGO -->
+  
+
+
+  <!-- ====== MAIN ====== -->
+  <!-- ===== TICKET HEADING ===== -->
+<div class="tp-ticket-head tp-head-anim">
+
+    <div class="tp-ticket-badge">
+      🎫 Ticket Details
+    </div>
+  
+  </div>
+  <main class="container">
+
+    <!-- Ticket Top Info -->
+    <section class="ticket-top card">
+      <div class="ticket-meta">
+        <div class="id">
+          <span class="t-id">TCK-00124</span>
+          <h1 class="title">Cannot connect to VPN from home network</h1>
+          <p class="subtitle">Affected user: abinaya.s — Windows 11 laptop</p>
+        </div>
+
+        <div class="controls">
+          <a href="404.html" style="text-decoration:none;">
+          <div class="status-pill status-open" id="statusPill">Open</div></a>
+
+          <div class="priority">Priority: <strong id="priorityLabel">High</strong></div>
+
+          <div class="assignee">Assignee: <strong id="assigneeLabel">Unassigned</strong></div>
+
+          <div class="button-group">
+            <a href="404.html" style="text-decoration:none;">
+            <button class="btn primary" id="editBtn"><i class="fa fa-pen"></i> Edit</button>
+            <a href="404.html" style="text-decoration:none;">
+            <button class="btn" id="assignBtn"><i class="fa fa-user-plus"></i> Assign</button>
+            <a href="404.html" style="text-decoration:none;">
+            <button class="btn danger" id="closeBtn"><i class="fa fa-check"></i> Close</button>
+          </div></a>
+        </div></a>
+      </div></a>
+    
+    </section>
+
+    <div class="layout">
+
+      <!-- Left column: description + attachments + comments -->
+      <section class="main-col">
+
+        <!-- Description -->
+        <article class="card description">
+          <h3>Issue Description</h3>
+          <p id="ticketDescription">
+            The user reports that the VPN client (StackVPN v3.2) fails to connect on their home network.
+            Error shown: "Connection timeout". The user can connect from office network without issue.
+            Tried restarting the client and PC. Needs priority investigation — remote work blocked.
+          </p>
+
+          <!-- Attachments -->
+          <div class="attachments">
+            <h4>Attachments</h4>
+            <div class="att-grid">
+              <div class="att">
+                <a href="404.html" style="text-decoration:none;">
+                <div class="att-thumb">PNG</div></a>
+                <a href="404.html" style="text-decoration:none;">
+                <div class="att-meta">vpn-error.png</div></a>
+                <button class="att-download" title="Download"><i class="fa fa-download"></i></button>
+              </div>
+
+              <div class="att">
+                <div class="att-thumb">LOG</div>
+                <div class="att-meta">vpn-log.txt</div>
+                <button class="att-download" title="Download"><i class="fa fa-download"></i></button>
+              </div>
+
+            </div>
+          </div>
+        </article>
+
+        <!-- Comments -->
+        <article class="card comments">
+          <h3>Activity & Comments</h3></a>
+
+          <div class="timeline" id="timeline">
+            <!-- timeline entries inserted by JS -->
+            <div class="timeline-item">
+              <div class="time">Nov 20, 2025 — 09:12</div>
+              <div class="entry">
+                <div class="entry-head"><strong>System</strong> changed status to <em>Open</em></div>
+                <div class="entry-body">Ticket created by user via portal.</div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="time">Nov 20, 2025 — 09:20</div>
+              <div class="entry">
+                <div class="entry-head"><strong>Helpdesk</strong> added comment</div>
+                <div class="entry-body">Please confirm your home router model and ISP.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add comment -->
+
+          
+          <form id="commentForm" class="comment-form">
+  
+            <textarea id="commentInput" placeholder="Add a comment..." required></textarea>
+          
+            <div class="comment-actions">
+              
+              
+              <input 
+              type="file" 
+              id="commentFile" 
+              style="cursor:pointer;" 
+              onclick="window.location.href='404.html'"
+            >
+            
+          
+              <button 
+                type="button" 
+                class="btn primary"
+                style="cursor:pointer;"
+                onclick="
+                  let comment = document.getElementById('commentInput').value.trim();
+                  if(!comment){
+                    alert('Please fill details');
+                    return;
+                  }
+                  window.location.href='404.html';
+                "
+              >
+                <i class='fa fa-comment'></i> Post Comment
+              </button>
+          
+            </div>
+          
+          </form>
+          
+        </article>
+
+      </section>
+
+      <!-- Right column: details & quick actions -->
+      <aside class="side-col">
+
+        <div class="card details">
+          <h4>Details</h4>
+          <dl>
+            <div class="row">
+              <dt>Created</dt>
+              <dd id="createdOn">Nov 20, 2025 — 09:12</dd>
+            </div>
+
+            <div class="row">
+              <dt>Requester</dt>
+              <dd>abinaya.s</dd>
+            </div>
+
+            <div class="row">
+              <dt>Department</dt>
+              <dd>IT Support</dd>
+            </div>
+
+            <div class="row">
+              <dt>Category</dt>
+              <dd>Network</dd>
+            </div>
+
+            <div class="row">
+              <dt>Location</dt>
+              <dd>Chennai (Remote)</dd>
+            </div>
+
+            <div class="row">
+              <dt>Tags</dt>
+              <dd><span class="tag">VPN</span> <span class="tag">Remote</span></dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="card quick-actions">
+          <h4>Quick Actions</h4>
+          <a href="404.html" style="text-decoration:none;">
+          <button class="btn full" id="escalateBtn"><i class="fa fa-exclamation-triangle"></i> Escalate</button></a>
+          <button class="btn full" id="reopenBtn" style="display:none"><i class="fa fa-rotate-left"></i> Reopen</button>
+          <a href="404.html" style="text-decoration:none;">
+          <button class="btn full ghost" id="printBtn"><i class="fa fa-print"></i> Print</button></a>
+        </div>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+  <style>
+    /* ===== TICKET HEADING ===== */
+.tp-ticket-head{
+  width:100%;
+  text-align:center;
+  margin:30px 0 20px;
+}
+
+/* CYLINDRICAL CAPSULE */
+.tp-ticket-badge{
+  display:inline-block;
+  padding:10px 30px;
+  border-radius:50px;
+  font-size:16px;
+  font-weight:500;
+  color:black;
+
+  background:rgba(95,92,255,0.15);
+  border:1px solid rgba(95,92,255,0.4);
+
+  backdrop-filter:blur(12px);
+  box-shadow:0 8px 30px rgba(0,0,0,0.3);
+
+  transition:0.4s;
+}
+
+/* HOVER GLOW */
+.tp-ticket-badge:hover{
+  transform:scale(1.05);
+  background:rgba(95,92,255,0.25);
+}
+
+/* ANIMATION */
+.tp-head-anim{
+  opacity:0;
+  transform:translateY(60px);
+  transition:0.8s ease;
+}
+
+.tp-head-show{
+  opacity:1 !important;
+  transform:translateY(0) !important;
+}
+
+/* RESPONSIVE */
+
+/* TABLET */
+@media(max-width:768px){
+  .tp-ticket-badge{
+    font-size:14px;
+    padding:8px 22px;
+  }
+}
+
+/* MOBILE */
+@media(max-width:480px){
+  .tp-ticket-head{
+    margin:20px 0 10px;
+  }
+
+  .tp-ticket-badge{
+    font-size:13px;
+    padding:7px 18px;
+  }
+}
+    /* RESET + BASE */
+* { box-sizing: border-box; margin:0; padding:0; font-family: "Poppins", sans-serif; }
+:root{
+  --bg:#f7f8fb;
+  --card:#ffffff;
+  --muted:#6b7280;
+  --accent:#4f46e5;
+  --danger:#dc2626;
+  --success:#16a34a;
+  --shadow: 0 6px 18px rgba(15,23,42,0.08);
+}
+
+/* BODY + HEADER */
+body { background: var(--bg); color: #111827; min-height:100vh; }
+/* MAIN LAYOUT */
+.container { max-width:1200px; margin:90px auto 40px; padding:0 18px; }
+
+/* Ticket Top */
+.card { background:var(--card); border-radius:12px; padding:18px; box-shadow:var(--shadow); }
+.ticket-top { margin-bottom:18px; }
+.ticket-meta { display:flex; gap:20px; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; }
+.ticket-meta .id { max-width:68%; }
+.t-id{ color:var(--muted); font-weight:700; display:inline-block; margin-bottom:6px; }
+.title { font-size:20px; margin-bottom:6px; color:#0f1724; }
+.subtitle { color:var(--muted); font-size:13px; }
+
+/* Controls */
+.controls { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+.status-pill{ padding:8px 12px; border-radius:999px; font-weight:700; color:white; }
+.status-open{ background:#f59e0b; } /* amber for open */
+.status-inprogress{ background:#06b6d4; } /* cyan */
+.status-resolved{ background:var(--success); }
+.status-closed{ background:#6b7280; }
+
+.priority { color:var(--muted); }
+.assignee { color:var(--muted); }
+
+/* Buttons */
+.button-group { display:flex; gap:8px; }
+.button-group .btn { padding:8px 12px; font-size:14px; border-radius:8px; }
+
+/* LAYOUT: two-column */
+.layout { display:grid; grid-template-columns: 1fr 320px; gap:18px; }
+
+/* MAIN COLUMN */
+.main-col .card { margin-bottom:16px; }
+.description h3, .comments h3 { margin-bottom:10px; }
+.description p { line-height:1.5; color:#283046; }
+
+.attachments { margin-top:12px; }
+.att-grid { display:flex; gap:10px; flex-wrap:wrap; }
+.att { background:#f3f4f6; padding:8px; border-radius:8px; width:120px; position:relative; display:flex; align-items:center; gap:8px; }
+.att-thumb{ width:44px; height:44px; border-radius:6px; background:#e6e9ff; display:flex; align-items:center; justify-content:center; font-weight:700; color:#31345a; }
+.att-meta { font-size:13px; color:#374151; flex:1; }
+.att-download { position:absolute; right:8px; bottom:8px; background:transparent; border:0; cursor:pointer; color:#374151; }
+
+/* COMMENTS / TIMELINE */
+.timeline { display:flex; flex-direction:column; gap:12px; margin-bottom:12px; }
+.timeline-item { display:flex; gap:12px; }
+.timeline-item .time { min-width:130px; font-size:12px; color:var(--muted); }
+.timeline-item .entry { background:#fbfdff; padding:10px; border-radius:8px; box-shadow: 0 4px 10px rgba(13,18,35,0.03); }
+.entry-head { font-weight:700; margin-bottom:6px; }
+.entry-body { color:#334155; }
+
+/* Comment form */
+.comment-form textarea { width:100%; min-height:80px; padding:10px; border-radius:8px; border:1px solid #e6e9ef; resize:vertical; margin-bottom:8px; }
+.comment-actions { display:flex; gap:8px; align-items:center; justify-content:space-between; }
+.comment-actions input[type="file"] { font-size:13px; }
+.comment-actions .btn { padding:8px 12px; }
+
+/* SIDE COLUMN */
+.side-col .details h4, .quick-actions h4 { margin-bottom:10px; }
+.details dl .row { display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid #f1f5f9; }
+.details dt { color:var(--muted); font-size:13px; }
+.details dd { font-weight:600; color:#0f1724; }
+.tag { display:inline-block; background:#eef2ff; color:#4338ca; padding:6px 8px; border-radius:6px; font-size:12px; margin-right:6px; }
+
+.quick-actions .btn.full { width:100%; margin-bottom:8px; text-align:left; }
 
 
 
+/* RESPONSIVE */
+/* 
+/* ================================
+   RESPONSIVE MEDIA QUERIES
+================================ */
 
+/* ===== Large Tablets (max-width: 1024px) ===== */
+@media (max-width: 1024px) {
+  .layout {
+    grid-template-columns: 1fr 280px;
+  }
+  .ticket-meta .id {
+    max-width: 100%;
+  }
+  .title {
+    font-size: 18px;
+  }
+}
+
+/* ===== Tablets (max-width: 900px) ===== */
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .side-col {
+    order: -1;
+  }
+  .controls {
+    justify-content: flex-start;
+    gap: 10px;
+  }
+  .button-group {
+    flex-wrap: wrap;
+  }
+}
+
+/* ===== Mobile (max-width: 768px) ===== */
+@media (max-width: 768px) {
+
+  .container {
+    margin: 70px auto 30px;
+    padding: 0 12px;
+  }
+
+  .ticket-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .title {
+    font-size: 17px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+  }
+
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline-item {
+    flex-direction: column;
+  }
+
+  .timeline-item .time {
+    min-width: 100%;
+    font-size: 11px;
+  }
+
+  .att {
+    width: 100%;
+  }
+
+  .comment-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .comment-actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .quick-actions .btn.full {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ===== Small Mobile (max-width: 520px) ===== */
+@media (max-width: 520px) {
+
+  .title {
+    font-size: 16px;
+  }
+
+  .t-id {
+    font-size: 12px;
+  }
+
+  .ticket-meta .id {
+    max-width: 100%;
+  }
+
+  .controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .button-group {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .button-group .btn {
+    width: 100%;
+  }
+
+  .timeline-item .entry {
+    padding: 8px;
+  }
+}
+
+/* ===== Extra Small Mobile (max-width: 400px) ===== */
+@media (max-width: 400px) {
+  .title {
+    font-size: 15px;
+  }
+
+  .comment-form textarea {
+    min-height: 70px;
+  }
+
+  .tag {
+    font-size: 11px;
+    padding: 4px 6px;
+  }
+
+  .att-thumb {
+    width: 38px;
+    height: 38px;
+    font-size: 12px;
+  }
+}
+  </style>
+  <script>
+    
+(function(){
+
+  const el = document.querySelector('.tp-ticket-head');
+  if(!el) return;
+
+  const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        el.classList.add('tp-head-show');
+      }
+    });
+  },{threshold:0.2});
+
+  observer.observe(el);
+
+})();
+</script>
+  </script>
 
 <!-- ================= FOOTER ================= -->
 <footer class="bio-footer">

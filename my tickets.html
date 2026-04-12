@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Tickets</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+/* ===== THEME ===== */
+:root{
+  --bg:#0f172a;
+  --card:#020617;
+  --text:#fff;
+  --accent:#00eaff;
+}
+body.light{
+  --bg:#f1f5f9;
+  --card:#fff;
+  --text:#000;
+}
+
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
+
+body{display:flex;background:var(--bg);color:var(--text);}
+
+/* SIDEBAR */
+.sidebar{
+  width:250px;height:100vh;background:var(--card);
+  padding:20px;position:fixed;
+}
+.sidebar h2{color:var(--accent);}
+.sidebar a{
+  display:block;padding:12px;margin:10px 0;
+  color:var(--text);text-decoration:none;border-radius:8px;
+}
+.sidebar a:hover{background:var(--accent);color:#000;}
+
+/* MAIN */
+.main{margin-left:250px;width:100%;padding:20px;}
+
+/* TOPBAR */
+.topbar{
+  display:flex;justify-content:space-between;
+  align-items:center;margin-bottom:20px;flex-wrap:wrap;
+}
+
+/* PROFILE */
+.profile{display:flex;align-items:center;gap:10px;}
+.profile img{
+  width:40px;height:40px;border-radius:50%;
+  border:2px solid var(--accent);
+}
+
+/* CARDS */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:15px;margin-bottom:20px;
+}
+.card{
+  background:var(--card);padding:15px;border-radius:10px;text-align:center;
+}
+
+/* FILTER */
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:15px;}
+.filters input,.filters select{
+  padding:10px;border-radius:8px;border:none;
+}
+
+/* TABLE */
+.table-container{
+  background:var(--card);
+  padding:15px;border-radius:10px;margin-bottom:20px;
+  overflow-x:auto;
+}
+table{width:100%;min-width:800px;}
+th,td{padding:10px;}
+th{color:var(--accent);}
+
+/* BADGE */
+.badge{padding:5px 10px;border-radius:20px;font-size:12px;}
+.open{background:#facc15;color:#000;}
+.closed{background:#22c55e;color:#000;}
+.pending{background:#3b82f6;}
+.critical{background:#ef4444;}
+
+/* BUTTON */
+.btn{
+  padding:5px 10px;border:none;border-radius:6px;
+  background:var(--accent);cursor:pointer;
+}
+
+/* EXTRA CONTENT */
+.extra{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+
+.box{
+  background:var(--card);
+  padding:15px;
+  border-radius:10px;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .sidebar{width:70px;}
+  .sidebar h2{display:none;}
+  .main{margin-left:70px;}
+}
+@media(max-width:480px){
+  .main{margin-left:0;}
+  .topbar{flex-direction:column;align-items:flex-start;}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <h2>Tester</h2>
+  <a href="./tester.html"><i class="fa fa-home"></i> Dashboard</a>
+  <a href="./my tickets.html"><i class="fa fa-ticket"></i> My Tickets</a>
+  <a href="./login.html"><i class="fa fa-sign-out"></i> Logout</a> 
+</div>
+
+<div class="main">
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <h2>My Tickets</h2>
+  <div class="profile">
+    <img src="./ava1.webp">
+    <div>
+      <div>tester@gmail.com</div>
+      <small>TESTER</small>
+    </div>
+  </div>
+</div>
+
+<!-- CARDS -->
+<div class="cards">
+  <div class="card"><h3 id="total">0</h3><p>Total</p></div>
+  <div class="card"><h3 id="open">0</h3><p>Open</p></div>
+  <div class="card"><h3 id="pending">0</h3><p>Pending</p></div>
+  <div class="card"><h3 id="closed">0</h3><p>Closed</p></div>
+</div>
+
+<!-- FILTER -->
+<div class="filters">
+  <input type="text" id="search" placeholder="Search tickets...">
+  <select id="statusFilter">
+    <option value="">All</option>
+    <option>Open</option>
+    <option>Closed</option>
+    <option>Pending</option>
+  </select>
+</div>
+
+<!-- TABLE -->
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Issue</th>
+        <th>Status</th>
+        <th>Priority</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+</div>
+
+<!-- EXTRA CONTENT -->
+<div class="extra">
+
+  <div class="box">
+    <h3>📊 Ticket Insights</h3>
+    <p>Total handled today: <b id="todayCount">0</b></p>
+    <p>Completion rate: <b id="completion">0%</b></p>
+  </div>
+
+  <div class="box">
+    <h3>📌 Tips</h3>
+    <p>- Always update ticket status</p>
+    <p>- Close resolved issues quickly</p>
+    <p>- Add proper comments (future upgrade)</p>
+  </div>
+
+  <div class="box">
+    <h3>📈 Performance</h3>
+    <p>Efficiency Score: 85%</p>
+    <p>Response Time: Good</p>
+  </div>
+
+</div>
+
+</div>
+
+<script>
+
+/* DATA */
+let tickets = JSON.parse(localStorage.getItem("tickets")) || [];
+let userEmail = "tester@gmail.com";
+
+/* RENDER */
+function render(){
+
+  let search = document.getElementById("search").value.toLowerCase();
+  let status = document.getElementById("statusFilter").value;
+
+  let filtered = tickets
+    .map((t,i)=>({...t,index:i}))
+    .filter(t =>
+      t.assignedTo === userEmail &&
+      t.issue.toLowerCase().includes(search) &&
+      (!status || t.status === status)
+    );
+
+  let tbody = document.getElementById("tableBody");
+  tbody.innerHTML="";
+
+  filtered.forEach(t=>{
+    tbody.innerHTML += `
+    <tr>
+      <td>#${t.index+1}</td>
+      <td>${t.issue}</td>
+      <td><span class="badge ${t.status.toLowerCase()}">${t.status}</span></td>
+      <td><span class="badge ${t.priority.toLowerCase()}">${t.priority}</span></td>
+      <td>
+        <button class="btn" onclick="updateStatus(${t.index},'Closed')">Close</button>
+        <button class="btn" onclick="deleteTicket(${t.index})">Delete</button>
+      </td>
+    </tr>`;
+  });
+
+  /* STATS */
+  let myTickets = tickets.filter(t=>t.assignedTo===userEmail);
+
+  total.innerText = myTickets.length;
+  open.innerText = myTickets.filter(t=>t.status==="Open").length;
+  pending.innerText = myTickets.filter(t=>t.status==="Pending").length;
+  closed.innerText = myTickets.filter(t=>t.status==="Closed").length;
+
+  /* EXTRA */
+  todayCount.innerText = myTickets.length;
+  let closedCount = myTickets.filter(t=>t.status==="Closed").length;
+  completion.innerText = myTickets.length ? Math.round((closedCount/myTickets.length)*100)+"%" : "0%";
+}
+
+/* UPDATE */
+function updateStatus(i,status){
+  tickets[i].status = status;
+  localStorage.setItem("tickets", JSON.stringify(tickets));
+  render();
+}
+
+/* DELETE */
+function deleteTicket(i){
+  tickets.splice(i,1);
+  localStorage.setItem("tickets", JSON.stringify(tickets));
+  render();
+}
+
+/* EVENTS */
+search.addEventListener("input",render);
+statusFilter.addEventListener("change",render);
+
+render();
+
+</script>
+
+</body>
+</html>
