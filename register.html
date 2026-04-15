@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
+
 /* ===== ROOT ===== */
 :root{
   --cyber-primary:#00ff99;
@@ -18,30 +19,6 @@
   --cyber-card:rgba(255,255,255,0.05);
   --cyber-border:rgba(255,255,255,0.12);
   --cyber-text:#94a3b8;
-}
-
-/* FIX DROPDOWN VISIBILITY */
-.cyber-input select {
-  background: rgba(0, 0, 0, 0.6);  /* solid background */
-  color: #fff;
-}
-
-/* IMPORTANT: option styling */
-.cyber-input select option {
-  background: #020617;   /* dark solid */
-  color: #ffffff;        /* always visible */
-}
-
-/* Optional hover (works in some browsers) */
-.cyber-input select option:hover {
-  background: #0ea5e9;
-  color: #fff;
-}
-
-.cyber-input select {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
 }
 
 /* ===== GLOBAL ===== */
@@ -62,7 +39,49 @@ body{
   color:#fff;
 }
 
-/* ===== CYBER PARTICLE BG ===== */
+/* ===== BACK BUTTON ===== */
+/* ===== BACK BUTTON (CAPSULE STYLE) ===== */
+.cyber-back-top{
+  position:absolute;
+  top:20px;
+  left:20px;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 18px;
+  border-radius:50px; /* capsule shape */
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,0.15);
+  color:#fff;
+  text-decoration:none;
+  font-size:14px;
+  font-weight:500;
+  z-index:10;
+  transition:all 0.3s ease;
+}
+
+/* ICON STYLE */
+.cyber-back-top i{
+  font-size:13px;
+}
+
+/* HOVER EFFECT */
+.cyber-back-top:hover{
+  background:linear-gradient(90deg,#00ff99,#0ea5e9);
+  color:#000;
+  transform:translateX(-5px) scale(1.03);
+  box-shadow:0 0 15px rgba(0,255,153,0.6);
+}
+@media(max-width:600px){
+  .cyber-back-top{
+    top:12px;
+    left:12px;
+    padding:8px 14px;
+    font-size:12px;
+  }
+}
+/* ===== PARTICLES ===== */
 .cyber-bg{
   position:absolute;
   width:100%;
@@ -81,9 +100,8 @@ body{
 }
 
 @keyframes cyberParticle{
-  0%{transform:translateY(0) translateX(0)}
-  50%{transform:translateY(50vh) translateX(30px)}
-  100%{transform:translateY(100vh) translateX(0)}
+  0%{transform:translateY(0)}
+  100%{transform:translateY(100vh)}
 }
 
 /* ===== WRAPPER ===== */
@@ -94,21 +112,6 @@ body{
   z-index:2;
 }
 
-/* BACK BUTTON */
-.cyber-back{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  color:var(--cyber-text);
-  text-decoration:none;
-  margin-bottom:15px;
-  font-size:14px;
-}
-
-.cyber-back:hover{
-  color:var(--cyber-primary);
-}
-
 /* ===== CARD ===== */
 .cyber-card{
   background:var(--cyber-card);
@@ -116,20 +119,19 @@ body{
   backdrop-filter:blur(18px);
   border-radius:18px;
   padding:35px;
-  color:#fff;
   box-shadow:0 20px 60px rgba(0,0,0,0.5);
 }
 
 /* LOGO */
 .cyber-logo{
   text-align:center;
-  margin-bottom:10px;
 }
 
 .cyber-logo img{
   height:55px;
 }
 
+/* ICON */
 .cyber-icon{
   width:70px;
   height:70px;
@@ -170,8 +172,8 @@ body{
 
 .cyber-group label{
   font-size:13px;
-  display:block;
   margin-bottom:6px;
+  display:block;
 }
 
 .cyber-input{
@@ -181,6 +183,7 @@ body{
   border-radius:10px;
   height:46px;
   padding:0 12px;
+  background:rgba(0,0,0,0.4);
 }
 
 .cyber-input i{
@@ -188,8 +191,23 @@ body{
   color:#94a3b8;
 }
 
-.cyber-input input,
+/* FIXED DROPDOWN */
 .cyber-input select{
+  background:#020617;
+  color:#fff;
+  border:none;
+  outline:none;
+  width:100%;
+  cursor:pointer;
+}
+
+.cyber-input select option{
+  background:#020617;
+  color:#fff;
+}
+
+/* INPUT TEXT */
+.cyber-input input{
   border:none;
   outline:none;
   background:transparent;
@@ -205,8 +223,6 @@ body{
 .cyber-pass span{
   position:absolute;
   right:10px;
-  top:50%;
-  transform:translateY(-50%);
   cursor:pointer;
 }
 
@@ -215,13 +231,6 @@ body{
   color:#ff4d4d;
   font-size:11px;
   display:none;
-}
-
-/* TERMS */
-.cyber-terms{
-  font-size:13px;
-  margin:10px 0;
-  color:var(--cyber-text);
 }
 
 /* BUTTON */
@@ -251,25 +260,27 @@ body{
 
 .cyber-link a{
   color:var(--cyber-primary);
-  text-decoration:none;
 }
 
-/* ===== RESPONSIVE ===== */
-
-/* Laptop/Tablet */
+/* RESPONSIVE */
 @media(max-width:900px){
   .cyber-grid{
     grid-template-columns:1fr;
   }
 }
 
-/* Mobile */
 @media(max-width:600px){
   .cyber-card{
-    padding:25px 20px;
+    padding:25px 18px;
   }
   .cyber-title{
     font-size:22px;
+  }
+  .cyber-back-top{
+    top:10px;
+    left:10px;
+    font-size:12px;
+    padding:8px 12px;
   }
 }
 
@@ -278,32 +289,33 @@ body{
 
 <body>
 
-<!-- PARTICLE BG -->
+<!-- BACK BUTTON -->
+<a href="index.html" class="cyber-back-top">
+  <i class="fa-solid fa-arrow-left"></i> Back to Home
+</a>
+
+<!-- PARTICLES -->
 <div class="cyber-bg">
-<span style="left:10%; animation-delay:0s;"></span>
-<span style="left:30%; animation-delay:2s;"></span>
-<span style="left:50%; animation-delay:4s;"></span>
-<span style="left:70%; animation-delay:1s;"></span>
-<span style="left:90%; animation-delay:3s;"></span>
+<span style="left:10%"></span>
+<span style="left:30%"></span>
+<span style="left:50%"></span>
+<span style="left:70%"></span>
+<span style="left:90%"></span>
 </div>
 
 <div class="cyber-wrapper">
 
-<a href="index.html" class="cyber-back">
-<i class="fa fa-arrow-left"></i> Back to Home
-</a>
-
 <div class="cyber-card">
 
 <div class="cyber-logo">
-<img src="./logo.webp" alt="Cyber Logo">
+<img src="./logo.webp">
 </div>
 
 <div class="cyber-icon">
 <i class="fa-solid fa-shield-halved"></i>
 </div>
 
-<h2 class="cyber-title">Create IT Service   Account</h2>
+<h2 class="cyber-title">Create IT Service Account</h2>
 <p class="cyber-sub">Join our secure platform</p>
 
 <form id="cyberRegForm">
@@ -314,7 +326,7 @@ body{
 <label>Full Name</label>
 <div class="cyber-input">
 <i class="fa fa-user"></i>
-<input type="text" placeholder="John Doe" required>
+<input type="text" required>
 </div>
 </div>
 
@@ -322,9 +334,8 @@ body{
 <label>Role</label>
 <div class="cyber-input">
 <select required>
-<option>Admin</option>
-<option>Tester</option>
-
+<option value="admin">Admin</option>
+<option value="tester">Tester</option>
 </select>
 </div>
 </div>
@@ -362,7 +373,7 @@ body{
 
 </div>
 
-<div class="cyber-terms">
+<div style="margin:10px 0;">
 <input type="checkbox" required> Accept terms & policy
 </div>
 
@@ -378,42 +389,14 @@ Already have an account? <a href="login.html">Login</a>
 </div>
 
 <script>
-/* PASSWORD TOGGLE */
 function togglePass(id){
   const el = document.getElementById(id);
   el.type = el.type === "password" ? "text" : "password";
 }
 
-/* VALIDATION */
-const email = document.getElementById("email");
-const pass = document.getElementById("pass");
-const confirm = document.getElementById("confirm");
-
 document.getElementById("cyberRegForm").addEventListener("submit",(e)=>{
   e.preventDefault();
-  let valid = true;
-
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)){
-    document.getElementById("emailErr").style.display="block";
-    valid=false;
-  } else document.getElementById("emailErr").style.display="none";
-
-  if(pass.value.length < 6){
-    document.getElementById("passErr").style.display="block";
-    valid=false;
-  } else document.getElementById("passErr").style.display="none";
-
-  if(pass.value !== confirm.value){
-    document.getElementById("confirmErr").style.display="block";
-    valid=false;
-  } else document.getElementById("confirmErr").style.display="none";
-
-  if(valid){
-    // save data (demo)
-    localStorage.setItem("email", email.value);
-    localStorage.setItem("role", document.querySelector("select").value);
-    window.location.href="404.html";
-  }
+  window.location.href="login.html";
 });
 </script>
 
