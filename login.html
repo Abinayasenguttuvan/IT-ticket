@@ -52,10 +52,6 @@ body::before{
   transition:0.3s;
 }
 
-.back-btn i{
-  font-size:14px;
-}
-
 .back-btn:hover{
   background:rgba(0,234,255,0.3);
   transform:translateX(-5px);
@@ -110,9 +106,15 @@ body::before{
   background:rgba(255,255,255,0.1);
   color:#fff;
   outline:none;
+  cursor:pointer;
 }
 
-.form-group input:focus,
+/* FIXED DROPDOWN ISSUE */
+.form-group select option{
+  background:#0b0f1a;
+  color:#ffffff;
+}
+
 .form-group select:focus{
   background:rgba(255,255,255,0.2);
 }
@@ -152,6 +154,7 @@ body::before{
   text-align:center;
   font-size:14px;
   margin-top:10px;
+  color:white;
 }
 
 .signup a{
@@ -181,6 +184,14 @@ body::before{
 @media(max-width:900px){
   .container{
     flex-direction:column;
+  }
+
+  .login-left{
+    padding:30px 20px;
+  }
+
+  .login-right{
+    padding:30px 20px;
   }
 
   .back-btn{
@@ -233,7 +244,7 @@ body::before{
 
     <button class="btn" onclick="login()">Login</button>
 
-    <div class="signup" style="color:white;">
+    <div class="signup">
       Don’t have an account?
       <a href="register.html">Register</a>
     </div>
