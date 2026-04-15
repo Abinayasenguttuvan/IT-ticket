@@ -115,6 +115,7 @@
     cursor:pointer;
     font-size:14px;
     transition:0.3s;
+    
   }
   
   .login{
@@ -488,10 +489,157 @@ body{
   .hero h1{ font-size:26px; }
   .btn{ width:100%; }
 }
+/* ===== PREMIUM PRELOADER ===== */
+#preloader{
+  position:fixed;
+  width:100%;
+  height:100%;
+  top:0;
+  left:0;
+  background:linear-gradient(135deg,#0b0f1a,#05070d);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  transition:opacity 0.7s ease, visibility 0.7s;
+}
+
+/* GLASS BOX */
+.loader-box{
+  text-align:center;
+  padding:40px 30px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(15px);
+  box-shadow:0 10px 40px rgba(0,0,0,0.6);
+  width:280px;
+}
+
+/* LOGO */
+.logo-wrapper{
+  position:relative;
+  width:100px;
+  height:100px;
+  margin:auto;
+}
+
+.logo{
+  width:100%;
+  border-radius:50%;
+  position:relative;
+  z-index:2;
+}
+
+/* ROTATING RING */
+.ring{
+  position:absolute;
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  border:3px solid transparent;
+  border-top:3px solid #00eaff;
+  border-right:3px solid #0077ff;
+  animation:spin 1.2s linear infinite;
+  z-index:1;
+}
+
+/* GLOW EFFECT */
+.logo-wrapper::after{
+  content:'';
+  position:absolute;
+  width:120%;
+  height:120%;
+  top:-10%;
+  left:-10%;
+  background:radial-gradient(circle,#00eaff55,transparent);
+  filter:blur(20px);
+  z-index:0;
+}
+
+/* TITLE */
+.loader-box h2{
+  margin-top:20px;
+  color:#00eaff;
+  font-size:18px;
+  letter-spacing:1px;
+}
+
+/* PROGRESS */
+.progress-box{
+  width:100%;
+  height:6px;
+  background:rgba(255,255,255,0.1);
+  border-radius:10px;
+  margin-top:20px;
+  overflow:hidden;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#00eaff,#0077ff);
+  transition:width 0.3s;
+}
+
+/* PERCENT */
+#loading-text{
+  display:block;
+  margin-top:10px;
+  color:#aaa;
+  font-size:13px;
+}
+
+/* ANIMATION */
+@keyframes spin{
+  0%{transform:rotate(0deg);}
+  100%{transform:rotate(360deg);}
+}
+
+/* HIDE */
+#preloader.hide{
+  opacity:0;
+  visibility:hidden;
+}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  .loader-box{
+    width:220px;
+    padding:30px 20px;
+  }
+
+  .logo-wrapper{
+    width:80px;
+    height:80px;
+  }
+
+  .loader-box h2{
+    font-size:16px;
+  }
+}
 </style>
 </head>
 
 <body>
+  <!-- PREMIUM PRELOADER -->
+<div id="preloader">
+  <div class="loader-box">
+
+    <div class="logo-wrapper">
+      <span class="ring"></span>
+      <img src="./logo.webp" class="logo">
+    </div>
+
+    <h2>IT Ticketing System</h2>
+
+    <div class="progress-box">
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+
+    <span id="loading-text">0%</span>
+
+  </div>
+</div>
 
 <section class="hero">
 
@@ -528,6 +676,29 @@ body{
 </section>
 
 <script>
+
+
+let progress = 0;
+const bar = document.getElementById("progress-bar");
+const text = document.getElementById("loading-text");
+
+const interval = setInterval(() => {
+  progress += Math.floor(Math.random() * 10) + 5;
+
+  if(progress >= 100){
+    progress = 100;
+    clearInterval(interval);
+
+    setTimeout(() => {
+      document.getElementById("preloader").classList.add("hide");
+    }, 500);
+  }
+
+  bar.style.width = progress + "%";
+  text.innerText = progress + "%";
+
+}, 150);
+
 // SCROLL ANIMATION
 const observer = new IntersectionObserver(entries=>{
   entries.forEach(entry=>{
@@ -2184,9 +2355,9 @@ document.querySelectorAll('.tp-card a').forEach(btn=>{
           <img src="./arjun.webp" alt="">
           <div class="itteam-overlay">
             <h3>Arjun Kumar</h3>
-            <span>Full Stack Developer</span>
+            <span style="color:white;">Full Stack Developer</span>
              <a href="./404.html">
-            <div class="itteam-social">
+            <div class="itteam-social" style="color:white;">
 
               <i class="fab fa-facebook-f"></i>
               <i class="fab fa-twitter"></i>
@@ -2200,9 +2371,9 @@ document.querySelectorAll('.tp-card a').forEach(btn=>{
           <img src="./nithiya.webp" alt="">
           <div class="itteam-overlay">
             <h3>Priya Sharma</h3>
-            <span>UI/UX Designer</span>
+            <span style="color:white;">UI/UX Designer</span>
             <a href="./404.html">
-            <div class="itteam-social">
+            <div class="itteam-social" style="color:white;">
               <i class="fab fa-facebook-f"></i>
               <i class="fab fa-twitter"></i>
               <i class="fab fa-instagram"></i>
@@ -2215,9 +2386,9 @@ document.querySelectorAll('.tp-card a').forEach(btn=>{
           <img src="./joe.webp" alt="">
           <div class="itteam-overlay">
             <h3>Rahul Verma</h3>
-            <span>Cloud Engineer</span>
+            <span style="color:white;">Cloud Engineer</span>
             <a href="./404.html">
-            <div class="itteam-social">
+            <div class="itteam-social" style="color:white;">
               <i class="fab fa-facebook-f"></i>
               <i class="fab fa-twitter"></i>
               <i class="fab fa-instagram"></i>
@@ -2230,9 +2401,9 @@ document.querySelectorAll('.tp-card a').forEach(btn=>{
           <img src="./sana.webp" alt="">
           <div class="itteam-overlay">
             <h3>Ananya Reddy</h3>
-            <span>Cybersecurity Analyst</span>
+            <span style="color:white;">Cybersecurity Analyst</span>
             <a href="./404.html">
-            <div class="itteam-social">
+            <div class="itteam-social" style="color:white;">
               <i class="fab fa-facebook-f"></i>
               <i class="fab fa-twitter"></i>
               <i class="fab fa-instagram"></i>

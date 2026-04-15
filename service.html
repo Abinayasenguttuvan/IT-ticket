@@ -288,7 +288,7 @@
   
       <!-- BREADCRUMB -->
       <div class="faqhero-breadcrumb">
-        <a href="./index.html">Home</a>
+        <a href="./index.html" style="color:white;">Home</a>
         <span>→</span>
         <span class="active">SERVICE</span>
       </div>
@@ -1329,6 +1329,235 @@ document.querySelectorAll('.tp-card a').forEach(btn=>{
 });
 </script>
   
+<section class="tp-faq">
+
+  <!-- HEADER -->
+  <div class="tp-faq-head tp-anim" data-delay="0.1">
+    <div class="tp-faq-badge">❓ FAQ</div>
+    <h2>Frequently Asked Questions</h2>
+    <p>Everything you need to know about our IT ticketing system.</p>
+  </div>
+
+  <!-- FAQ LIST -->
+  <div class="tp-faq-container">
+
+    <!-- ITEM -->
+    <div class="tp-faq-item tp-anim" data-delay="0.2">
+      <div class="tp-faq-question">
+        What is an IT ticketing system?
+        <span>+</span>
+      </div>
+      <div class="tp-faq-answer">
+        An IT ticketing system helps track, manage, and resolve IT issues efficiently within an organization.
+      </div>
+    </div>
+
+    <div class="tp-faq-item tp-anim" data-delay="0.3">
+      <div class="tp-faq-question">
+        How fast can tickets be resolved?
+        <span>+</span>
+      </div>
+      <div class="tp-faq-answer">
+        Resolution time depends on priority, but automation ensures faster handling and quick turnaround.
+      </div>
+    </div>
+
+    <div class="tp-faq-item tp-anim" data-delay="0.4">
+      <div class="tp-faq-question">
+        Is my data secure?
+        <span>+</span>
+      </div>
+      <div class="tp-faq-answer">
+        Yes, we use enterprise-grade encryption and security protocols to protect your data.
+      </div>
+    </div>
+
+    <div class="tp-faq-item tp-anim" data-delay="0.5">
+      <div class="tp-faq-question">
+        Can I integrate with other tools?
+        <span>+</span>
+      </div>
+      <div class="tp-faq-answer">
+        Absolutely, our system integrates with popular tools like Slack, Microsoft Teams, and more.
+      </div>
+    </div>
+
+    <div class="tp-faq-item tp-anim" data-delay="0.6">
+      <div class="tp-faq-question">
+        Do you provide 24/7 support?
+        <span>+</span>
+      </div>
+      <div class="tp-faq-answer">
+        Yes, our support team is available round-the-clock to assist with any issues.
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<style>
+
+/* SECTION */
+.tp-faq{
+  padding:100px 8%;
+  background:#0b0f1a;
+}
+
+/* HEADER */
+.tp-faq-head{
+  text-align:center;
+  margin-bottom:50px;
+  color : white;
+}
+
+.tp-faq-badge{
+  display:inline-block;
+  padding:6px 18px;
+  border-radius:50px;
+  background:rgba(95,92,255,0.15);
+  border:1px solid rgba(95,92,255,0.4);
+  margin-bottom:10px;
+}
+
+.tp-faq-head h2{
+  font-size:36px;
+  margin-bottom:10px;
+}
+
+.tp-faq-head p{
+  opacity:0.7;
+}
+
+/* CONTAINER */
+.tp-faq-container{
+  max-width:800px;
+  margin:auto;
+}
+
+/* ITEM */
+.tp-faq-item{
+  margin-bottom:15px;
+  border-radius:15px;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(12px);
+  overflow:hidden;
+  transition:0.3s;
+}
+
+/* QUESTION */
+.tp-faq-question{
+  padding:18px 20px;
+  cursor:pointer;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-weight:500;
+  color:white;
+}
+
+/* ANSWER */
+.tp-faq-answer{
+  max-height:0;
+  overflow:hidden;
+  padding:0 20px;
+  font-size:14px;
+  opacity:0.8;
+  transition:0.4s ease;
+  color:white;
+  
+}
+
+/* ACTIVE */
+.tp-faq-item.active .tp-faq-answer{
+  max-height:150px;
+  padding:15px 20px;
+  color:white;
+}
+
+.tp-faq-item.active span{
+  transform:rotate(45deg);
+}
+
+/* ICON */
+.tp-faq-question span{
+  transition:0.3s;
+  font-size:20px;
+}
+
+/* HOVER */
+.tp-faq-item:hover{
+  background:rgba(95,92,255,0.1);
+}
+
+/* ANIMATION */
+.tp-anim{
+  opacity:0;
+  transform:translateY(60px);
+  transition:0.8s ease;
+}
+
+.tp-show{
+  opacity:1 !important;
+  transform:translateY(0) !important;
+}
+
+/* RESPONSIVE */
+
+/* TABLET */
+@media(max-width:768px){
+  .tp-faq-head h2{
+    font-size:28px;
+  }
+}
+
+/* MOBILE */
+@media(max-width:480px){
+  .tp-faq{
+    padding:70px 5%;
+  }
+}
+
+</style>
+
+<script>
+(function(){
+
+  const section = document.querySelector('.tp-faq');
+  if(!section) return;
+
+  const items = section.querySelectorAll('.tp-faq-item');
+  const anims = section.querySelectorAll('.tp-anim');
+
+  /* ACCORDION */
+  items.forEach(item=>{
+    const question = item.querySelector('.tp-faq-question');
+
+    question.addEventListener('click', ()=>{
+      item.classList.toggle('active');
+    });
+  });
+
+  /* SCROLL ANIMATION */
+  const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+
+        let delay = entry.target.dataset.delay || 0;
+
+        setTimeout(()=>{
+          entry.target.classList.add('tp-show');
+        }, delay * 1000);
+
+      }
+    });
+  },{threshold:0.2});
+
+  anims.forEach(el=>observer.observe(el));
+
+})();
+</script>
+
 
 
 

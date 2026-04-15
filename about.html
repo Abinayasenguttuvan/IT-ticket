@@ -274,6 +274,8 @@
   </script>
     
     </body>
+
+    
 <section class="faqhero-section">
 
     <!-- OVERLAY -->
@@ -289,7 +291,7 @@
   
       <!-- BREADCRUMB -->
       <div class="faqhero-breadcrumb">
-        <a href="./index.html">Home</a>
+        <a href="./index.html" style='color:white;'>Home</a>
         <span>→</span>
         <span class="active">ABOUT</span>
       </div>
@@ -427,6 +429,329 @@
     window.addEventListener("scroll", revealFAQHero);
     </script>
 
+<section class="ticket-process">
+
+  <div class="tp-container">
+
+    <!-- HEADER -->
+    <div class="tp-header tp-anim">
+
+      <div class="tp-heading-pill">
+        <span class="tp-pill-glow"></span>
+        <h2>How Our Ticketing System Works</h2>
+      </div>
+    
+      <p>Smart workflow with interactive progress</p>
+    
+    </div>
+
+    <!-- TIMELINE -->
+    <div class="tp-line-wrap">
+      <div class="tp-line"></div>
+      <div class="tp-progress"></div>
+      <div class="tp-glow"></div>
+    </div>
+
+    <!-- GRID -->
+    <div class="tp-grid">
+
+      <div class="tp-card tp-anim" data-step="1">
+        <div class="tp-dot">
+          <!-- ICON -->
+          <svg viewBox="0 0 24 24"><path d="M3 3h18v14H3zM3 17h18v4H3z"/></svg>
+        </div>
+        <h3>Create Ticket</h3>
+        <p>Submit your issue with complete details.</p>
+      </div>
+
+      <div class="tp-card tp-anim" data-step="2">
+        <div class="tp-dot">
+          <svg viewBox="0 0 24 24"><path d="M12 2l4 8H8l4-8zm0 20l-4-8h8l-4 8z"/></svg>
+        </div>
+        <h3>Assign & Analyze</h3>
+        <p>Auto assignment to right expert.</p>
+      </div>
+
+      <div class="tp-card tp-anim" data-step="3">
+        <div class="tp-dot">
+          <svg viewBox="0 0 24 24"><path d="M12 1l3 7h7l-5.5 4 2 7L12 15l-6.5 4 2-7L2 8h7z"/></svg>
+        </div>
+        <h3>Resolve Issue</h3>
+        <p>Quick and efficient resolution.</p>
+      </div>
+
+      <div class="tp-card tp-anim" data-step="4">
+        <div class="tp-dot">
+          <svg viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5L4 14l5 5 11-11-1.5-1.5z"/></svg>
+        </div>
+        <h3>Track & Close</h3>
+        <p>Monitor and close your ticket.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<style>
+
+  /* PILL BUTTON HEADING */
+.tp-heading-pill{
+position:relative;
+display:inline-block;
+padding:14px 40px;
+border-radius:100px;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(12px);
+border:1px solid rgba(255,255,255,0.15);
+overflow:hidden;
+margin-bottom:20px;
+}
+
+/* TEXT */
+.tp-heading-pill h2{
+font-size:28px;
+color:#fff;
+position:relative;
+z-index:2;
+}
+
+/* GLOW EFFECT */
+.tp-pill-glow{
+position:absolute;
+width:150px;
+height:150%;
+background:linear-gradient(120deg, transparent, rgba(95,92,255,0.6), transparent);
+top:-20%;
+left:-100%;
+transform:skewX(-20deg);
+animation:tp-pill-move 4s linear infinite;
+}
+
+/* ANIMATION */
+@keyframes tp-pill-move{
+0%{ left:-100%; }
+100%{ left:120%; }
+}
+
+/* RESPONSIVE */
+
+/* Laptop */
+@media(max-width:1200px){
+.tp-heading-pill h2{
+  font-size:24px;
+}
+}
+
+/* Tablet */
+@media(max-width:768px){
+.tp-heading-pill{
+  padding:12px 30px;
+}
+
+.tp-heading-pill h2{
+  font-size:20px;
+}
+}
+
+/* Mobile */
+@media(max-width:480px){
+.tp-heading-pill{
+  padding:10px 20px;
+}
+
+.tp-heading-pill h2{
+  font-size:18px;
+}
+}
+
+/* SECTION */
+.ticket-process{
+  padding:100px 8%;
+  background:#0b0f1a;
+}
+
+/* CONTAINER */
+.tp-container{
+  max-width:1200px;
+  margin:auto;
+}
+
+/* HEADER */
+.tp-header{
+  text-align:center;
+  margin-bottom:80px;
+}
+
+.tp-header h2{font-size:36px;}
+.tp-header p{opacity:0.7;}
+
+/* TIMELINE */
+.tp-line-wrap{
+  position:relative;
+  height:4px;
+  margin-bottom:60px;
+}
+
+.tp-line{
+  width:100%;
+  height:4px;
+  background:rgba(255,255,255,0.1);
+  position:absolute;
+}
+
+.tp-progress{
+  width:0%;
+  height:4px;
+  background:#5f5cff;
+  position:absolute;
+  transition:0.4s;
+}
+
+.tp-glow{
+  position:absolute;
+  width:120px;
+  height:20px;
+  background:radial-gradient(circle, #5f5cff, transparent);
+  top:-8px;
+  left:0;
+  filter:blur(10px);
+  transition:0.4s;
+}
+
+/* GRID */
+.tp-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:30px;
+}
+
+/* CARD */
+.tp-card{
+  padding:30px;
+  text-align:center;
+  border-radius:20px;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(15px);
+  cursor:pointer;
+  transition:0.4s;
+}
+
+/* ACTIVE */
+.tp-card.active{
+  background:rgba(95,92,255,0.15);
+  transform:translateY(-10px) scale(1.05);
+}
+
+/* ICON DOT */
+.tp-dot{
+  width:65px;
+  height:65px;
+  border-radius:50%;
+  background:#5f5cff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:auto 0 15px;
+}
+
+.tp-dot svg{
+  width:28px;
+  fill:#fff;
+}
+
+/* ANIMATION */
+.tp-anim{
+  opacity:0;
+  transform:translateY(80px);
+  transition:0.8s ease;
+}
+
+.tp-show{
+  opacity:1 !important;
+  transform:translateY(0) !important;
+}
+
+/* STAGGER */
+.tp-card:nth-child(1){transition-delay:0.2s;}
+.tp-card:nth-child(2){transition-delay:0.4s;}
+.tp-card:nth-child(3){transition-delay:0.6s;}
+.tp-card:nth-child(4){transition-delay:0.8s;}
+
+/* RESPONSIVE */
+
+/* LAPTOP */
+@media(max-width:1200px){
+  .tp-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+/* TABLET */
+@media(max-width:768px){
+  .tp-line-wrap{display:none;}
+  .tp-grid{grid-template-columns:1fr;}
+}
+
+/* MOBILE */
+@media(max-width:480px){
+  .ticket-process{padding:70px 5%;}
+  .tp-header h2{font-size:24px;}
+}
+
+</style>
+
+<script>
+(function(){
+
+  const section = document.querySelector('.ticket-process');
+  if(!section) return;
+
+  const cards = section.querySelectorAll('.tp-card');
+  const progress = section.querySelector('.tp-progress');
+  const glow = section.querySelector('.tp-glow');
+  const anims = section.querySelectorAll('.tp-anim');
+
+  /* ANIMATION (ONE BY ONE) */
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('tp-show');
+      }
+    });
+  },{threshold:0.2});
+
+  anims.forEach(el=>observer.observe(el));
+
+  /* STEP BY STEP PROGRESS */
+  function activateStep(index){
+    cards.forEach(c=>c.classList.remove('active'));
+    cards[index].classList.add('active');
+
+    let percent = ((index+1)/cards.length)*100;
+    progress.style.width = percent + "%";
+    glow.style.left = percent + "%";
+  }
+
+  /* CLICK */
+  cards.forEach((card,i)=>{
+    card.addEventListener('click', ()=>activateStep(i));
+  });
+
+  /* AUTO STEP ON SCROLL */
+  window.addEventListener('scroll', ()=>{
+    const rect = section.getBoundingClientRect();
+    const visible = Math.min(Math.max((window.innerHeight - rect.top)/rect.height,0),1);
+
+    let step = Math.floor(visible * cards.length);
+    if(step >= cards.length) step = cards.length - 1;
+
+    activateStep(step);
+  });
+
+})();
+</script>
 
 
 <section class="tp-about">
@@ -678,259 +1003,8 @@
   })();
   </script>
 
-<section class="tp-services">
 
-    <h2 class="tp-title tp-anim">🚀 What We Offer</h2>
   
-    <div class="tp-services-grid">
-  
-      <!-- CARD -->
-      <div class="tp-card tp-anim" data-delay="0.1">
-        <div class="tp-img">
-          <img src="./IT.webp">
-        </div>
-        <i class="fa-solid fa-ticket"></i>
-        <h3>IT Ticket Management</h3>
-        <p>Manage, assign, and track service tickets seamlessly with real-time updates.</p>
-        <!-- <a href="404.html">Select</a> -->
-      </div>
-  
-      <div class="tp-card tp-anim" data-delay="0.2">
-        <div class="tp-img">
-          <img src="./workflow.webp">
-        </div>
-        <i class="fa-solid fa-gear"></i>
-        <h3>Workflow Automation</h3>
-        <p>Automate routing, approvals, and IT processes to boost productivity.</p>
-        <!-- <a href="404.html">Select</a> -->
-      </div>
-  
-      <div class="tp-card tp-anim" data-delay="0.3">
-        <div class="tp-img">
-          <img src="./cloud.webp">
-        </div>
-        <i class="fa-solid fa-cloud"></i>
-        <h3>Cloud Integration</h3>
-        <p>Integrate Stackly with your cloud tools for smoother operations.</p>
-        <!-- <a href="404.html">Select</a> -->
-      </div>
-  
-      <div class="tp-card tp-anim" data-delay="0.4">
-        <div class="tp-img">
-          <img src="./compliance.webp">
-        </div>
-        <i class="fa-solid fa-shield-halved"></i>
-        <h3>Security Compliance</h3>
-        <p>Enterprise-grade protection with secure data handling & access control.</p>
-        <!-- <a href="404.html">Select</a> -->
-      </div>
-  
-      <div class="tp-card tp-anim" data-delay="0.5">
-        <div class="tp-img">
-          <img src="./analytics.webp">
-        </div>
-        <i class="fa-solid fa-chart-line"></i>
-        <h3>Analytics & Insights</h3>
-        <p>Get detailed reports, performance tracking, and actionable insights.</p>
-        <!-- <a href="404.html">Select</a> -->
-      </div>
-  
-      <div class="tp-card tp-anim" data-delay="0.6">
-        <div class="tp-img">
-          <img src="./corp1.webp">
-        </div>
-        <i class="fa-solid fa-users"></i>
-        <h3>Team Collaboration</h3>
-        <p>Built-in communication tools for seamless team collaboration.</p>
-        <!-- <a href="404.html">Select</a> -->
-      </div>
-  
-    </div>
-  
-  </section>
-  
-  <style>
-  
-  /* SECTION */
-  .tp-services{
-    padding:100px 8%;
-    background:#0b0f1a;
-  }
-  
-  /* TITLE */
-  .tp-title{
-    text-align:center;
-    margin-bottom:60px;
-    font-size:36px;
-  }
-  
-  /* GRID */
-  .tp-services-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:30px;
-  }
-  
-  /* CARD */
-  .tp-card{
-    padding:25px;
-    border-radius:25px;
-    background:rgba(255,255,255,0.05);
-    backdrop-filter:blur(15px);
-    text-align:center;
-    transition:0.4s;
-    position:relative;
-    overflow:hidden;
-  }
-  
-  /* IMAGE */
-  .tp-img{
-    width:100%;
-    height:200px;
-    border-radius:120px; /* CYLINDRICAL */
-    overflow:hidden;
-    margin-bottom:20px;
-  }
-  
-  .tp-img img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    transition:0.5s;
-  }
-  
-  /* ICON */
-  .tp-card i{
-    font-size:24px;
-    margin-bottom:10px;
-    color:#5f5cff;
-  }
-  
-  /* TEXT */
-  .tp-card h3{
-    margin-bottom:10px;
-  }
-  
-  .tp-card p{
-    font-size:14px;
-    opacity:0.8;
-    margin-bottom:15px;
-  }
-  
-  /* BUTTON */
-  .tp-card a{
-    display:inline-block;
-    padding:10px 22px;
-    border-radius:30px;
-    background:#5f5cff;
-    color:#fff;
-    text-decoration:none;
-  }
-  
-  /* HOVER EFFECT */
-  .tp-card:hover{
-    transform:translateY(-10px) scale(1.03);
-  }
-  
-  /* IMAGE ZOOM */
-  .tp-card:hover img{
-    transform:scale(1.1);
-  }
-  
-  /* GLOW */
-  .tp-card::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(120deg,transparent,rgba(95,92,255,0.3),transparent);
-    opacity:0;
-    transition:0.4s;
-  }
-  
-  .tp-card:hover::before{
-    opacity:1;
-  }
-  
-  /* ANIMATION */
-  .tp-anim{
-    opacity:0;
-    transform:translateY(60px);
-    transition:0.8s ease;
-  }
-  
-  .tp-show{
-    opacity:1 !important;
-    transform:translateY(0) !important;
-  }
-  
-  /* RESPONSIVE */
-  
-  /* LAPTOP */
-  @media(max-width:1200px){
-    .tp-services-grid{
-      grid-template-columns:repeat(2,1fr);
-    }
-  }
-  
-  /* TABLET */
-  @media(max-width:768px){
-    .tp-services-grid{
-      grid-template-columns:1fr;
-    }
-  
-    .tp-title{
-      font-size:28px;
-    }
-  }
-  
-  /* MOBILE */
-  @media(max-width:480px){
-    .tp-services{
-      padding:70px 5%;
-    }
-  
-    .tp-img{
-      height:180px;
-    }
-  }
-  
-  </style>
-  
-  <script>
-  (function(){
-  
-    const section = document.querySelector('.tp-services');
-    if(!section) return;
-  
-    const items = section.querySelectorAll('.tp-anim');
-  
-    const observer = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting){
-  
-          let delay = entry.target.dataset.delay || 0;
-  
-          setTimeout(()=>{
-            entry.target.classList.add('tp-show');
-          }, delay * 1000);
-  
-        }
-      });
-    },{threshold:0.2});
-  
-    items.forEach(el=>observer.observe(el));
-  
-  })();
-
-
- 
-document.querySelectorAll('.tp-card a').forEach(btn=>{
-  btn.addEventListener('click', function(e){
-    e.preventDefault();
-    window.location.href = "./404.html"; // try ./ or / or pages/
-  });
-});
-</script>
   
 
 <section class="tp2-pricing">
@@ -1242,9 +1316,9 @@ document.querySelectorAll('.tp-card a').forEach(btn=>{
           <img src="./arjun.webp" alt="">
           <div class="itteam-overlay">
             <h3>Arjun Kumar</h3>
-            <span>Full Stack Developer</span>
+            <span style="color:white;">Full Stack Developer</span>
              <a href="./404.html">
-            <div class="itteam-social">
+            <div class="itteam-social" style="color:white;">
 
               <i class="fab fa-facebook-f"></i>
               <i class="fab fa-twitter"></i>
@@ -1258,9 +1332,9 @@ document.querySelectorAll('.tp-card a').forEach(btn=>{
           <img src="./nithiya.webp" alt="">
           <div class="itteam-overlay">
             <h3>Priya Sharma</h3>
-            <span>UI/UX Designer</span>
+            <span style="color:white;">UI/UX Designer</span>
             <a href="./404.html">
-            <div class="itteam-social">
+            <div class="itteam-social" style="color:white;">
               <i class="fab fa-facebook-f"></i>
               <i class="fab fa-twitter"></i>
               <i class="fab fa-instagram"></i>
@@ -1273,9 +1347,9 @@ document.querySelectorAll('.tp-card a').forEach(btn=>{
           <img src="./joe.webp" alt="">
           <div class="itteam-overlay">
             <h3>Rahul Verma</h3>
-            <span>Cloud Engineer</span>
+            <span style="color:white;">Cloud Engineer</span>
             <a href="./404.html">
-            <div class="itteam-social">
+            <div class="itteam-social" style="color:white;">
               <i class="fab fa-facebook-f"></i>
               <i class="fab fa-twitter"></i>
               <i class="fab fa-instagram"></i>
@@ -1288,9 +1362,9 @@ document.querySelectorAll('.tp-card a').forEach(btn=>{
           <img src="./sana.webp" alt="">
           <div class="itteam-overlay">
             <h3>Ananya Reddy</h3>
-            <span>Cybersecurity Analyst</span>
+            <span style="color:white;">Cybersecurity Analyst</span>
             <a href="./404.html">
-            <div class="itteam-social">
+            <div class="itteam-social" style="color:white;">
               <i class="fab fa-facebook-f"></i>
               <i class="fab fa-twitter"></i>
               <i class="fab fa-instagram"></i>
@@ -1499,6 +1573,324 @@ window.addEventListener("load", revealStagger);
 
 })();
     </script>
+
+
+<section class="crx3-testimonials">
+
+  <div class="crx3-container">
+
+    <div class="crx3-header crx3-reveal">
+      <h2>Hear What Our Happy Clients Say About Their Success Stories</h2>
+    </div>
+
+    <div class="crx3-slider">
+      <div class="crx3-track">
+
+        <!-- CARD 1 -->
+        <div class="crx3-card crx3-video crx3-reveal">
+          <video src="./ticket.mp4" muted loop></video>
+          <div class="crx3-play">▶</div>
+          <div class="crx3-user">
+            <img src="./ava1.webp">
+            <div><h4>Michael Torres</h4><span>CEO, TechNova</span></div>
+          </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="crx3-card crx3-content crx3-reveal">
+          <div class="crx3-stars">★★★★★</div>
+          <h3>Creative Strategies That Stand Out</h3>
+          <p>Working with this team felt like adding a full creative department to our company.</p>
+          <div class="crx3-user">
+            <img src="./ava1.webp">
+            <div><h4>Michael Hayes</h4><span>CEO, TechNova</span></div>
+          </div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="crx3-card crx3-video crx3-reveal">
+          <video src="./ticket.mp4" muted loop></video>
+          <div class="crx3-play">▶</div>
+          <div class="crx3-user">
+            <img src="./ava2.webp">
+            <div><h4>Emma Watson</h4><span>Founder</span></div>
+          </div>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="crx3-card crx3-content crx3-reveal">
+          <div class="crx3-stars">★★★★★</div>
+          <h3>Outstanding Experience</h3>
+          <p>Their team delivered beyond expectations. Highly recommended.</p>
+          <div class="crx3-user">
+            <img src="./ava2.webp">
+            <div><h4>Sophia Lee</h4><span>Marketing Head</span></div>
+          </div>
+        </div>
+
+
+        <!-- CARD 1 -->
+        <div class="crx3-card crx3-video crx3-reveal">
+          <video src="./ticket.mp4" muted loop></video>
+          <div class="crx3-play">▶</div>
+          <div class="crx3-user">
+            <img src="./ava1.webp">
+            <div><h4>Michael Torres</h4><span>CEO, TechNova</span></div>
+          </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="crx3-card crx3-content crx3-reveal">
+          <div class="crx3-stars">★★★★★</div>
+          <h3>Creative Strategies That Stand Out</h3>
+          <p>Working with this team felt like adding a full creative department to our company.</p>
+          <div class="crx3-user">
+            <img src="./ava1.webp">
+            <div><h4>Michael Hayes</h4><span>CEO, TechNova</span></div>
+          </div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="crx3-card crx3-video crx3-reveal">
+          <video src="./ticket.mp4" muted loop></video>
+          <div class="crx3-play">▶</div>
+          <div class="crx3-user">
+            <img src="./ava2.webp">
+            <div><h4>Emma Watson</h4><span>Founder</span></div>
+          </div>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="crx3-card crx3-content crx3-reveal">
+          <div class="crx3-stars">★★★★★</div>
+          <h3>Outstanding Experience</h3>
+          <p>Their team delivered beyond expectations. Highly recommended.</p>
+          <div class="crx3-user">
+            <img src="./ava2.webp">
+            <div><h4>Sophia Lee</h4><span>Marketing Head</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="crx3-dots"></div>
+
+  </div>
+
+  <!-- VIDEO MODAL -->
+  <div class="crx3-modal">
+    <video controls></video>
+  </div>
+
+</section>
+
+<style>
+  .crx3-testimonials{
+padding:100px 20px;
+background: black;
+font-family:Poppins,sans-serif;
+overflow:hidden;
+}
+
+.crx3-container{max-width:1200px;margin:auto;}
+
+.crx3-header{text-align:center;margin-bottom:60px;}
+.crx3-header h2{font-size:34px;font-weight:700;}
+
+/* SLIDER */
+.crx3-slider{overflow:hidden;color:black;}
+.crx3-track{display:flex;gap:30px;transition:0.6s ease;color:black;}
+
+/* CARD */
+.crx3-card{
+min-width:320px;
+border-radius:20px;
+background:rgba(255,255,255,0.6);
+backdrop-filter:blur(12px);
+padding:20px;
+transition:0.6s;
+transform:scale(0.85);
+opacity:0.6;
+position:relative;
+}
+
+/* ACTIVE */
+.crx3-card.active{
+transform:scale(1);
+opacity:1;
+}
+
+/* VIDEO */
+.crx3-video video{
+width:100%;
+height:220px;
+object-fit:cover;
+border-radius:15px;
+}
+
+.crx3-play{
+position:absolute;
+top:100px;
+left:50%;
+transform:translateX(-50%);
+background:#fff;
+width:60px;height:60px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+}
+
+/* TEXT */
+.crx3-stars{color:#f4b400;margin-bottom:10px;}
+.crx3-card h3{font-size:18px;margin-bottom:10px;}
+.crx3-card p{font-size:14px;color:#555;}
+
+/* USER */
+.crx3-user{display:flex;gap:10px;margin-top:15px;align-items:center;}
+.crx3-user img{width:40px;height:40px;border-radius:50%;}
+
+/* DOTS */
+.crx3-dots{
+display:flex;
+justify-content:center;
+gap:10px;
+margin-top:30px;
+}
+.crx3-dots span{
+width:10px;height:10px;
+background:#ccc;
+border-radius:50%;
+cursor:pointer;
+}
+.crx3-dots .active{background:#ff5c5c;}
+
+/* MODAL */
+.crx3-modal{
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:rgba(0,0,0,0.8);
+display:none;
+align-items:center;
+justify-content:center;
+}
+.crx3-modal video{
+width:80%;
+max-width:700px;
+}
+
+/* SCROLL ANIMATION */
+.crx3-reveal{
+opacity:0;
+transform:translateY(80px) scale(0.95);
+transition:all 0.8s cubic-bezier(.17,.67,.3,1);
+}
+.crx3-reveal.show{
+opacity:1;
+transform:translateY(0) scale(1);
+}
+
+/* RESPONSIVE */
+@media(max-width:992px){
+.crx3-card{min-width:280px;}
+}
+@media(max-width:600px){
+.crx3-card{min-width:240px;}
+.crx3-header h2{font-size:24px;}
+.crx3-reveal{
+  transform:translateY(40px);
+  transition:0.5s ease;
+}
+}
+  </style>
+  <script>
+      (function(){
+
+const section = document.querySelector('.crx3-testimonials');
+if(!section) return;
+
+const track = section.querySelector('.crx3-track');
+const cards = section.querySelectorAll('.crx3-card');
+const dotsWrap = section.querySelector('.crx3-dots');
+const modal = section.querySelector('.crx3-modal');
+const modalVideo = modal.querySelector('video');
+
+let index = 0;
+
+/* CREATE DOTS */
+cards.forEach((_,i)=>{
+let dot = document.createElement('span');
+if(i===0) dot.classList.add('active');
+dot.onclick=()=>{index=i;update();}
+dotsWrap.appendChild(dot);
+});
+
+const dots = dotsWrap.querySelectorAll('span');
+
+function update(){
+cards.forEach(c=>c.classList.remove('active'));
+dots.forEach(d=>d.classList.remove('active'));
+
+cards[index].classList.add('active');
+dots[index].classList.add('active');
+
+let offset = cards[index].offsetLeft - 100;
+track.style.transform = `translateX(-${offset}px)`;
+}
+
+setInterval(()=>{
+index = (index+1)%cards.length;
+update();
+},3000);
+
+update();
+
+/* VIDEO HOVER */
+section.querySelectorAll('video').forEach(v=>{
+v.addEventListener('mouseenter',()=>v.play());
+v.addEventListener('mouseleave',()=>v.pause());
+});
+
+/* VIDEO POPUP */
+section.querySelectorAll('.crx3-play').forEach((btn,i)=>{
+btn.onclick=()=>{
+  modal.style.display='flex';
+  modalVideo.src = cards[i].querySelector('video').src;
+  modalVideo.play();
+}
+});
+
+modal.onclick=()=>{
+modal.style.display='none';
+modalVideo.pause();
+}
+
+/* SCROLL REVEAL WITH STAGGER */
+const revealElements = section.querySelectorAll('.crx3-reveal');
+
+const observer = new IntersectionObserver((entries)=>{
+entries.forEach((entry)=>{
+  if(entry.isIntersecting){
+
+    revealElements.forEach((el,i)=>{
+      setTimeout(()=>{
+        el.classList.add('show');
+      }, i * 150);
+    });
+
+    observer.disconnect();
+  }
+});
+},{threshold:0.2});
+
+observer.observe(section);
+
+})();
+  </script>
+
 
 
 <!-- ================= FOOTER ================= -->
@@ -1819,6 +2211,8 @@ window.addEventListener("load", revealStagger);
     });
     }
     </script>
+
+    
 
     
     </body>
